@@ -29,6 +29,6 @@ Pull requests are welcome.
 2. ```
     npm install  OR yarn add
    ```
-2. ```
+3. ```
     npm start  OR yarn start
    ```
