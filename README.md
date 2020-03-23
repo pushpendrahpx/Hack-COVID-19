@@ -1,5 +1,3 @@
-# Make Sure you install Node before starting Node Server and REact App
-
 # Hack-COVID'19
 
 Our Project has Few Applications

@@ -6,6 +6,27 @@ const mongoose = require("mongoose");
 
 const config = require("./config.json"); // Configuration Files Containes Connection Details With Database
 
+// For Security Purpose We never ever Store Passwords in Plain Text
+const crypto = require("crypto");
+const uuid = require("uuid");
+
+
+// To Accept JSON
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}))
+
+const secret = config.SECRET_KEY;
+function getHashPassword(plainPassword){
+   return crypto.createHmac('sha256', secret)
+                   .update(plainPassword)
+                   .digest('hex');
+}
+const hash = getHashPassword('GoogleUser');
+console.log(hash);
+
+
+
 // Now Connecting to Database
 mongoose.connect(config.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true},()=>{
     console.log("Connected to Database")
