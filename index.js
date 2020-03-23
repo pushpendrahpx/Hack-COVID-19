@@ -2,8 +2,16 @@ const express = require("express")
 const app = express();
 const PORT = process.env.PORT || 5000;
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const config = require("./config.json"); // Configuration Files Containes Connection Details With Database
+
+// Now Connecting to Database
+mongoose.connect(config.mongoURI, {useNewUrlParser: true, useUnifiedTopology: true},()=>{
+    console.log("Connected to Database")
+});
+
+
 
 const ErrorMessageClass = require("./Models/ErrorMessage");
 
