@@ -34,12 +34,12 @@ class Navbar extends Component {
          this.JSX = <div className="navbar-end">
         <div className="navbar-item">
           <div className="buttons">
-            <a className="button is-primary">
+            <Link to='/register' className="button is-primary">
               <strong>Sign up</strong>
-            </a>
-            <a className="button is-light">
+            </Link>
+            <Link to='/' className="button is-light">
               Log in
-            </a>
+            </Link>
           </div>
         </div>
       </div>;

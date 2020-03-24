@@ -15,7 +15,17 @@ class home extends Component {
             status:false,
             isLoggedIn:value
     }
+    this.d();
+    
 }
+    d = async ()=>{
+        let response = await fetch("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAEj-Grl6VVp4XLN1bBOkTaVj9VBIcFSvU",
+        {
+            method:"POST"
+        });
+        let data = await response.json();
+        console.log(data)
+    }  
     
 
 

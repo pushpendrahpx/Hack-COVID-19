@@ -57,7 +57,14 @@ router.post("/register",(req,res)=>{
     }
 })
 
+router.get('/getalloftheusers',(req,res)=>{
 
+    let UserModel = require("./../Models/UserModel");
+    UserModel.find({},(err,docs)=>{
+        res.status(200).json(docs)
+    })
+
+})
 router.post('/login',(req,res)=>{
     let {phone,password} = req.body;
     try{
