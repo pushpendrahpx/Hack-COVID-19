@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { get } from 'mongoose';
+import Register from './Register';
 
 class login extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class login extends Component {
         }
     }
 
-    onSubmit = (e)=>{
+     onSubmit = async (e)=>{
         e.preventDefault();
 
         let email = e.target.email.value;
@@ -25,9 +27,27 @@ class login extends Component {
         {
 
             localStorage.setItem("token","ygfehbkerbdjlobjsdgfioaejknfdekjrdgn");
-            
+
             this.setState({loggedIn:true})
         }
+
+
+
+        let response = await fetch('http://localhost:5000/api/users/register',{
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            method:"POST",
+            body:JSON.stringify({
+                email:"pushpendj@gmail.com",
+                pass:"uhvbjzkbvnrd",
+                name:"SIEUJFK"
+            })
+        });
+        let data = await response.json()
+        console.log(data) 
+
+
         
     }
     onChange = (e)=>{
@@ -43,7 +63,9 @@ class login extends Component {
         if(this.state.loggedIn === true){
             return <Redirect to='/home' />
         }else{
-            return (<form onSubmit={this.onSubmit}>
+            return (<span>
+                <form onSubmit={this.onSubmit}>
+                <center style={{fontSize:'50px',fontWeight:200}}>Login Form</center>
                 <div class="field">
                     <label class="label">Email</label>
                     <div class="control">
@@ -60,11 +82,14 @@ class login extends Component {
                     </div>
                     {/* <p class="help">This is a help t/ext</p> */}
                     </div>
-                    
+                        <Link to='/register'>Create New Account</Link>
                     <div class="control">
-    <button class="button is-primary">Submit</button>
+   <center> <button class="button is-primary">Submit</button></center>
     </div>
-            </form>);
+            </form> 
+            <hr />
+          
+            </span>);
         }
     }
 

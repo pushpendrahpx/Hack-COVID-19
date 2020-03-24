@@ -7,6 +7,7 @@ import Home from './Pages/home';
 import Logout from './Pages/logout';
 
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
+import Register from './Pages/Register';
 function App(){
   return(<span>
     
@@ -16,6 +17,7 @@ function App(){
     <Navbar />
       <Switch>
         <Route path='/' exact component={Login} />
+        <Route path='/register' component={Register} />
         <Route path='/home' exact component={Home} />
         <Route path='/logout' component={Logout} />
       </Switch>

@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 5000;
 const router = express.Router();
 const mongoose = require("mongoose");
 
-const config = require("./config.json"); // Configuration Files Containes Connection Details With Database
+const config = require("./config.json"); // Configuration Files Containes Connection Details With Database & Some Security KEYS
 
 // For Security Purpose We never ever Store Passwords in Plain Text
 const crypto = require("crypto");
