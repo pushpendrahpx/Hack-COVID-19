@@ -20,7 +20,7 @@ class Navbar extends Component {
         
         console.log(this.state.isLoggedIn)
 
-        if(this.state.isLoggedIn == true){
+        if(false){
           this.JSX = <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
@@ -62,9 +62,9 @@ class Navbar extends Component {
         return (
             <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="/" style={{fontSize:"40px",fontWeight:200}}>
+          <Link to='/' className="navbar-item" style={{fontSize:"40px",fontWeight:200}}>
             Stay Quaratine
-          </a>
+          </Link>
       
           <a href="#ToggleNavbar" role="button" onClick={this.toggle} className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>

@@ -14,7 +14,7 @@ function App(){
     
 
     <BrowserRouter>
-    <Navbar />
+    
       <Switch>
         <Route path='/' exact component={Login} />
         <Route path='/register' component={Register} />

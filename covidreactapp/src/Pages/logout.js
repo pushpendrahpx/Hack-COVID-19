@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Navbar from '../Components/Navbar'
 
 class logout extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class logout extends Component {
     render() {
         return (
             <div>
+                <Navbar />
                 Logout
 
                 <Link to='/'>Go To Login Page</Link>

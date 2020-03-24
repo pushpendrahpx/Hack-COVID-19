@@ -1,19 +1,99 @@
 import React, { Component } from 'react'
 import './home.css';
+import { Link } from 'react-router-dom';
 class home extends Component {
     constructor(props) {
         super(props)
 
+        
         this.state = {
-                 
-        }
+            status:false
     }
- 
+}
+    
+
+
+    toggle = ()=>{
+        if(this.state.status === false){
+            this.setState({status:true});
+            
+        }else{
+            this.setState({status:false})
+        }
+
+        console.log(this.state)
+    }
+
+
 
     render() {
         return (
             <div
             >
+                <nav className="navbar" role="navigation" aria-label="main navigation">
+    <div className="navbar-brand">
+      <a className="navbar-item" href="/" style={{fontSize:"40px",fontWeight:200}}>
+        Stay Quaratine
+      </a>
+  
+      <a href="#ToggleNavbar" role="button" onClick={this.toggle} className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  
+    <div id="navbarBasicExample" className={this.state.status === true ? 'navbar-menu is-active':"navbar-menu"}>
+      <div className="navbar-start">
+        <Link to='/home' className="navbar-item" href="#Home">
+          Home
+        </Link>
+  
+        <a className="navbar-item" href="#services">
+          Services
+        </a>
+  
+        <div className="navbar-item has-dropdown is-hoverable">
+          <Link to='/home/settings' className="navbar-link" href="#login">
+            Settings
+          </Link>
+  
+          <div className="navbar-dropdown">
+            <a className="navbar-item">
+                Account Settings
+            </a>
+            <a className="navbar-item">
+            Location Services
+            </a>
+            <a className="navbar-item">
+              Privacy
+            </a>
+            <hr className="navbar-divider" />
+            <a className="navbar-item">
+                Contact Us
+            </a>
+            <a className="navbar-item">
+              Report an issue
+            </a>
+          </div>
+        </div>
+
+        
+      </div>
+  
+      <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              <Link to='logout' className="button is-danger">
+                Logout
+              </Link>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+    
+  </nav>
                 
                 <article class="message is-primary">
                 <div class="message-header">

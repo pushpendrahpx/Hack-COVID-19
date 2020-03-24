@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect, Link } from 'react-router-dom';
 import { get } from 'mongoose';
 import Register from './Register';
+import Navbar from '../Components/Navbar';
 
 class login extends Component {
     constructor(props) {
@@ -9,9 +10,13 @@ class login extends Component {
 
 
         let loggedIn = false;
-
+        if(localStorage.getItem("isLoggedIn") == "true"){
+            loggedIn = true;
+        }else{
+            loggedIn = false;
+        }
         this.state = {
-                email:'',
+                phone:'',
                 password:'',
                 loggedIn
         }
@@ -20,34 +25,32 @@ class login extends Component {
      onSubmit = async (e)=>{
         e.preventDefault();
 
-        let email = e.target.email.value;
+        let phone = e.target.phone.value;
         let password = e.target.password.value;
 
-        if(email == 'A' && password == 'A')
-        {
-
-            localStorage.setItem("token","ygfehbkerbdjlobjsdgfioaejknfdekjrdgn");
-
-            this.setState({loggedIn:true})
-        }
 
 
-
-        let response = await fetch('http://localhost:5000/api/users/register',{
+        let response = await fetch('http://localhost:5000/api/users/login',{
             headers:{
                 'Content-Type': 'application/json'
             },
             method:"POST",
             body:JSON.stringify({
-                email:"pushpendj@gmail.com",
-                pass:"uhvbjzkbvnrd",
-                name:"SIEUJFK"
+                phone:phone,
+                password:password
             })
         });
         let data = await response.json()
         console.log(data) 
 
-
+        if(data.statusCode == 200){
+            localStorage.setItem("isLoggedIn",true);
+            this.setState({
+                loggedIn:true
+            })
+        }else{
+            alert("Login Details are Invalid")
+        }
         
     }
     onChange = (e)=>{
@@ -64,12 +67,13 @@ class login extends Component {
             return <Redirect to='/home' />
         }else{
             return (<span>
-                <form onSubmit={this.onSubmit}>
+                <Navbar />
+                <form style={{padding:"20px"}} onSubmit={this.onSubmit}>
                 <center style={{fontSize:'50px',fontWeight:200}}>Login Form</center>
                 <div class="field">
-                    <label class="label">Email</label>
+                    <label class="label">Phone</label>
                     <div class="control">
-                        <input id='email' name='email' class="input" type="text" placeholder="Email ID" value={this.state.email} onChange={this.onChange} />
+                        <input id='phone' name='phone' class="input" type="number" placeholder="Phone Number" value={this.state.phone} onChange={this.onChange} />
                     </div>
                     {/* <p class="help">This is a help text</p> */}
                     </div>

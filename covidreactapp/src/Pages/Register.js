@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom';
+import Navbar from '../Components/Navbar';
 
 class Register extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class Register extends Component {
 
         // console.log(email,password,phone,name)
 
-        let response = await fetch('/api/users/register',{
+        let response = await fetch('http://localhost:5000/api/users/register',{
             headers:{
                 'Content-Type': 'application/json'
             },
@@ -77,7 +78,9 @@ class Register extends Component {
             return <Redirect to='/home' />
         }else{
             
-        return (<form onSubmit={this.onSubmit}>
+        return (<span>
+            <Navbar />
+            <form onSubmit={this.onSubmit}>
             {this.state.isPending == true ? <progress class="progress is-small is-primary" max="100">15%</progress>:''}
             <center style={{fontSize:'50px',fontWeight:200}}>Register Form</center>
             <div class="field">
@@ -118,7 +121,8 @@ class Register extends Component {
                 <div class="control">
                 <center><button class="button is-primary">Submit</button></center>
                 </div>
-        </form>)
+        </form>
+        </span>)
         }
     }
 }

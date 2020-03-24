@@ -57,4 +57,49 @@ router.post("/register",(req,res)=>{
     }
 })
 
+
+router.post('/login',(req,res)=>{
+    let {phone,password} = req.body;
+    try{
+        console.log("\n\n Recording Body");
+        console.log(req.body);
+        console.log("\n\n ====== Done =======");
+
+        if(phone.length == 10 && password.length >= 6){
+            password = getHashPassword(password);
+            let UserModel = require("./../Models/UserModel");
+            let User = new UserModel({phone:phone,password:password});
+            UserModel.findOne({phone:phone},(err,users)=>{
+                if(err){
+                    res.status(402).json({
+                        statusCode:402,
+                        error:"User With this Phone Doesn't exists"
+                    })
+                }
+
+                if(users.password == password){
+                    res.status(200).json({
+                        statusCode:200,
+                        success:"Logged In"
+                    })
+                }else{
+                    res.status(401).json({
+                        StatusCode:401,
+                        error:"Password Entered is Invalid"
+                    });
+                }
+            })
+            
+        }else{
+            throw ["Email is invalid","Phone Number is not 10 digit","password must be greater than 6","Name May be Invalid"]
+        }
+    }catch(error){
+        res.status(400).json({
+            statusCode:400,
+            error:error
+        });
+
+    }
+})
+
 module.exports = router;
