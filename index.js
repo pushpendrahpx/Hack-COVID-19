@@ -35,6 +35,7 @@ mongoose.connect(config.mongoURI, {useNewUrlParser: true, useUnifiedTopology: tr
 
 
 const ErrorMessageClass = require("./Models/ErrorMessage");
+app.use(express.static('./covidreactapp/build/'));
 
 // Users Routes
 var USERS = require("./Routes/Users");
