@@ -32,11 +32,7 @@ router.post("/register",(req,res)=>{
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
             let User = new UserModel({name:name,phone:phone,email:email,password:password,isVerifiedPhone:false,
-                isVerifiedEmail:false,
-                location:{
-                    lattitude:{type:0},
-                    longitude:{type:0}
-                }});
+                isVerifiedEmail:false});
             UserModel.countDocuments({phone:phone},(err,users)=>{
                 if(users == 0){
                     User.save().then(doc=>{
