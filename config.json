@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://CovidAdminUser:L2HF4BmbfptrFfZ9@cluster0-d31ip.mongodb.net/test?retryWrites=true&w=majority",
+    "SECRET_KEY":"HackCOVID19"
+}
