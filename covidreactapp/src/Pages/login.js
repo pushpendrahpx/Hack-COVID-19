@@ -18,16 +18,22 @@ class login extends Component {
         this.state = {
                 phone:'',
                 password:'',
-                loggedIn
+                loggedIn,
+                isPending:false
         }
     }
 
      onSubmit = async (e)=>{
         e.preventDefault();
-
+        this.setState({isPending:true})
         let phone = e.target.phone.value;
         let password = e.target.password.value;
 
+        if(!phone || !password){
+            this.setState({isPending:false})
+            alert("Phone and Password are Empty")
+            return;
+        }
 
 
         let response = await fetch('/api/users/login',{
@@ -51,6 +57,10 @@ class login extends Component {
         }else{
             alert("Login Details are Invalid")
         }
+
+
+
+        this.setState({isPending:false})
         
     }
     onChange = (e)=>{
@@ -68,6 +78,7 @@ class login extends Component {
         }else{
             return (<span>
                 <Navbar />
+                {this.state.isPending == true ? <progress class="progress is-small is-primary" max="100">15%</progress>:''}
                 <form style={{padding:"20px"}} onSubmit={this.onSubmit}>
                 <center style={{fontSize:'50px',fontWeight:200}}>Login Form</center>
                 <div class="field">
