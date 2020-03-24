@@ -78,7 +78,7 @@ router.post('/login',(req,res)=>{
                 }
 
                 try{
-                    f(users.password == password){
+                    if(users.password == password){
                         res.status(200).json({
                             statusCode:200,
                             success:"Logged In"
