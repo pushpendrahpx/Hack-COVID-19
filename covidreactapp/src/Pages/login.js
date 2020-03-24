@@ -30,7 +30,7 @@ class login extends Component {
 
 
 
-        let response = await fetch('http://localhost:5000/api/users/login',{
+        let response = await fetch('/api/users/login',{
             headers:{
                 'Content-Type': 'application/json'
             },
