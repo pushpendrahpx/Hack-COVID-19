@@ -24,6 +24,9 @@ function getHashPassword(plainPassword){
 router.post("/register",(req,res)=>{
     let {email,password,name,phone } = req.body;
     try{
+        console.log("\n\n Recording Body")
+        console.log(req.body)
+        console.log("\n\n ====== Done =======")
         if(email.length > 10 && phone.length == 10 && password.length >= 6 && name.length >= 3){
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
