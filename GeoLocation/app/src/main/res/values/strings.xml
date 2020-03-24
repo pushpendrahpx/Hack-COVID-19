@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">GeoLocation</string>
     <string name="title_activity_maps">Map</string>
+    <string name="already_user_login_here">Already User? LogIn here</string>
+    <string name="enter_your_phone_no">Enter your phone no</string>
+    <string name="user_name">User Name</string>
+    <string name="singup">SingUp</string>
+    <string name="logIn">Log In</string>
+    <string name="not_a_user_register_here">Not a user? Register here!!</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_user_name">User Name</string>
+    <string name="email_id">Email Id</string>
+    <string name="hint_enter_your_email_id">Enter Your Email Id</string>
 </resources>
