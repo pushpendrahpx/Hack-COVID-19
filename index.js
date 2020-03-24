@@ -39,8 +39,8 @@ const ErrorMessageClass = require("./Models/ErrorMessage");
 // Users Routes
 var USERS = require("./Routes/Users");
 app.use("/api/users",USERS);
-app.use('/',express.static('index.html'))
-app.get("/ifdh",(req,res)=>{
+// app.use('/',express.static('index.html'))
+app.get("/",(req,res)=>{
     console.log("Server Request Method in with GET '/' Method = "+req.secure)
     res.status(400).json(new ErrorMessageClass(400,"This API Request is Invalid"));
 })

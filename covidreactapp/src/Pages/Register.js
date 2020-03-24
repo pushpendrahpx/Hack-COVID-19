@@ -31,7 +31,7 @@ class Register extends Component {
 
         console.log(email,password,phone,name)
 
-        let response = await fetch('/api/users/register',{
+        let response = await fetch('https://uhdcnkdf4.herokuapp.com/api/users/register',{
             headers:{
                 'Content-Type': 'application/json'
             },
