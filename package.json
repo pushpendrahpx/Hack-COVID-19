@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "cd covidreactapp && npm run build",
+    "install-covidreactapp": "cd covidreactapp && npm install",
+    "heroku-postbuild": "npm run install-covidreactapp && npm run build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
