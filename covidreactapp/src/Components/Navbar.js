@@ -4,9 +4,47 @@ import { Link } from 'react-router-dom';
 class Navbar extends Component {
     constructor(props) {
         super(props)
+        let value = false;
+        if(localStorage.getItem("isLoggedIn") == "true"){
+            value = true;
+        }else{
+          value = false;
+        }
 
+        
         this.state = {
-                status:false
+                status:false,
+                isLoggedIn:value
+        }
+
+        
+        console.log(this.state.isLoggedIn)
+
+        if(this.state.isLoggedIn == true){
+          this.JSX = <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              <Link to='logout' className="button is-danger">
+                Logout
+              </Link>
+            </div>
+          </div>
+        </div>
+        }else{
+         this.JSX = <div className="navbar-end">
+        <div className="navbar-item">
+          <div className="buttons">
+            <a className="button is-primary">
+              <strong>Sign up</strong>
+            </a>
+            <a className="button is-light">
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>;
+
+
         }
     }
 
@@ -17,6 +55,8 @@ class Navbar extends Component {
         }else{
             this.setState({status:false})
         }
+        
+        
     }
     render() {
         return (
@@ -66,19 +106,10 @@ class Navbar extends Component {
             </div>
           </div>
       
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <a className="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a className="button is-light">
-                  Log in
-                </a>
-              </div>
-            </div>
-          </div>
+          {this.JSX}
         </div>
+        
+        
       </nav>
         )
     }
