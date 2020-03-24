@@ -77,16 +77,23 @@ router.post('/login',(req,res)=>{
                     })
                 }
 
-                if(users.password == password){
-                    res.status(200).json({
-                        statusCode:200,
-                        success:"Logged In"
+                try{
+                    f(users.password == password){
+                        res.status(200).json({
+                            statusCode:200,
+                            success:"Logged In"
+                        })
+                    }else{
+                        res.status(401).json({
+                            StatusCode:401,
+                            error:"Password Entered is Invalid"
+                        });
+                    }
+                }catch(ier){
+                    res.status(402).json({
+                        statusCode:402,
+                        error:"Phone Number doesnt Exists"
                     })
-                }else{
-                    res.status(401).json({
-                        StatusCode:401,
-                        error:"Password Entered is Invalid"
-                    });
                 }
             })
             
