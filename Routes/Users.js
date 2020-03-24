@@ -24,13 +24,19 @@ function getHashPassword(plainPassword){
 router.post("/register",(req,res)=>{
     let {email,password,name,phone } = req.body;
     try{
-        console.log("\n\n Recording Body")
-        console.log(req.body)
-        console.log("\n\n ====== Done =======")
+        console.log("\n\n Recording Body");
+        console.log(req.body);
+        console.log("\n\n ====== Done =======");
+
         if(email.length > 10 && phone.length == 10 && password.length >= 6 && name.length >= 3){
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
-            let User = new UserModel({name:name,phone:phone,email:email,password:password});
+            let User = new UserModel({name:name,phone:phone,email:email,password:password,isVerifiedPhone:false,
+                isVerifiedEmail:false,
+                location:{
+                    lattitude:{type:0},
+                    longitude:{type:0}
+                }});
             UserModel.countDocuments({phone:phone},(err,users)=>{
                 if(users == 0){
                     User.save().then(doc=>{
