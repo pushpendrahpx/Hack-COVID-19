@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import './home.css';
 import { Link, Redirect } from 'react-router-dom';
+import MainHome from './HomeComponents/MainHome';
 class home extends Component {
     constructor(props) {
         super(props)
+
+
+        navigator.geolocation.getCurrentPosition(function(location) {
+          console.log(location.coords.latitude);
+          console.log(location.coords.longitude);
+          console.log(location.coords.accuracy);
+        });
 
         let value = true;
         if(localStorage.getItem("isLoggedIn") == "true"){
@@ -113,7 +121,7 @@ class home extends Component {
         
         
       </nav>
-                    
+                      <MainHome />
                     <article class="message is-primary">
                     <div class="message-header">
                         <p>Your Account Details</p>
