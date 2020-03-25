@@ -22,7 +22,8 @@ function getHashPassword(plainPassword){
 
 
 router.post("/register",(req,res)=>{
-    let {email,password,name,phone } = req.body;
+
+    let {email,password,name,phone,loginTime } = req.body;
     try{
         console.log("\n\n Recording Body");
         console.log(req.body);
@@ -31,7 +32,7 @@ router.post("/register",(req,res)=>{
         if(email.length > 10 && phone.length == 10 && password.length >= 6 && name.length >= 3){
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
-            let User = new UserModel({name:name,phone:phone,email:email,password:password,isVerifiedPhone:false,
+            let User = new UserModel({name:name,phone:phone,email:email,password:password,lastLoginTime:loginTime,isVerifiedPhone:false,
                 isVerifiedEmail:false});
             UserModel.countDocuments({phone:phone},(err,users)=>{
                 if(users == 0){
@@ -66,7 +67,7 @@ router.get('/getalloftheusers',(req,res)=>{
 
 })
 router.post('/login',(req,res)=>{
-    let {phone,password} = req.body;
+    let {phone,password,loginTime} = req.body;
     try{
         console.log("\n\n Recording Body");
         console.log(req.body);
@@ -75,7 +76,7 @@ router.post('/login',(req,res)=>{
         if(phone.length == 10 && password.length >= 6){
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
-            let User = new UserModel({phone:phone,password:password});
+            let User = new UserModel({phone:phone,password:password,lastLoginTime:loginTime});
             UserModel.findOne({phone:phone},(err,users)=>{
                 if(err){
                     res.status(402).json({
@@ -121,6 +122,138 @@ router.post('/login',(req,res)=>{
 
 
 router.post('/update/:phone/location',(req,res)=>{
+    let {phone} = req.params;
+    let lat = req.body.lat;
+    let lng = req.body.lng;
+    let time = req.body.time;
+    console.log("Latitude = "+lat+ ", Longitude = " + lng +" Time = "+ time);
+
+    let UserModel = require("./../Models/UserModel");
+    UserModel.findOne({phone:phone},(error,UserFromDB)=>{
+            var lastlat = UserFromDB.location.latitude;
+            var lastlng = UserFromDB.location.longitude;
+        console.log("\t\t\t\Last Lat",lastlat)
+        UserFromDB.updateOne(
+                                {location:
+                                        {
+                                            latitude:{value:lat,time:time},
+                                            longitude:{value:lng,time:time},
+                                            last_lat:{value:lastlat.value,time:lastlat.time},
+                                            last_lng:{value:lastlng.value,time:lastlng.time}
+                                        },
+                                $push: {'location.$.old': {lat:lat,lng:lng,time:time}}
+                                },(err,docs)=>{
+                console.log(UserFromDB)
+            // console.log(docs)
+        res.json(UserFromDB)
+        })
+    })
+    
+})
+
+
+// Android
+
+router.post("/register/android",(req,res)=>{
+    
+    let {email,password,name,phone,loginTime } = req.body;
+    try{
+        console.log("\n\n Recording Body");
+        console.log(req.body);
+        console.log("\n\n ====== Done =======");
+
+        if(email.length > 10 && phone.length == 10 && password.length >= 6 && name.length >= 3){
+            password = getHashPassword(password);
+            let UserModel = require("./../Models/UserModel");
+            let User = new UserModel({name:name,phone:phone,email:email,password:password,lastLoginTime:loginTime,isVerifiedPhone:false,
+                isVerifiedEmail:false});
+            UserModel.countDocuments({phone:phone},(err,users)=>{
+                if(users == 0){
+                    User.save().then(doc=>{
+                        res.status(201).json({isRegistered:true,docs:{name:doc.name,email:doc.email,phone:doc.phone,scoreList:doc.TotalScore}})
+                    })
+                }else{
+                    res.status(400).json({
+                        error:"User Phone Already Exists"
+                    })
+                }
+            })
+            
+        }else{
+            throw ["Email is invalid","Phone Number is not 10 digit","password must be greater than 6","Name May be Invalid"]
+        }
+    }catch(error){
+        res.status(400).json({
+            statusCode:400,
+            error:error
+        });
+
+    }
+})
+router.get('/getalloftheusers/android',(req,res)=>{
+
+    let UserModel = require("./../Models/UserModel");
+    UserModel.find({},(err,docs)=>{
+        res.status(200).json(docs)
+    })
+
+})
+
+router.post('/login/android',(req,res)=>{
+    let {phone,password,loginTime} = req.body;
+    try{
+        console.log("\n\n Recording Body");
+        console.log(req.body);
+        console.log("\n\n ====== Done =======");
+
+        if(phone.length == 10 && password.length >= 6){
+            password = getHashPassword(password);
+            let UserModel = require("./../Models/UserModel");
+            let User = new UserModel({phone:phone,password:password,lastLoginTime:loginTime});
+            UserModel.findOne({phone:phone},(err,users)=>{
+                if(err){
+                    res.status(402).json({
+                        statusCode:402,
+                        error:"User With this Phone Doesn't exists"
+                    })
+                }
+
+                try{
+                    if(users.password == password){
+
+                        
+                        res.status(200).json({
+                            statusCode:200,
+                            success:"Logged In",
+                            userData:users
+                        })
+                    }else{
+                        res.status(401).json({
+                            StatusCode:401,
+                            error:"Password Entered is Invalid"
+                        });
+                    }
+                }catch(ier){
+                    res.status(402).json({
+                        statusCode:402,
+                        error:"Phone Number doesnt Exists"
+                    })
+                }
+            })
+            
+        }else{
+            throw ["Email is invalid","Phone Number is not 10 digit","password must be greater than 6","Name May be Invalid"]
+        }
+    }catch(error){
+        res.status(400).json({
+            statusCode:400,
+            error:error
+        });
+
+    }
+})
+
+router.post('/update/:phone/location/android',(req,res)=>{
     let {phone} = req.params;
     let lat = req.body.lat;
     let lng = req.body.lng;

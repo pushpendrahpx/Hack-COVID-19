@@ -6,6 +6,7 @@ const UserSchema = new Schema({
     email:String,
     phone:Number,
     password:String,
+    lastLoginTime:Date,
     isVerifiedPhone:Boolean,
     isVerifiedEmail:Boolean,
     lastScore:{value:Number,time:{type:Date},timeInstance:Number},
