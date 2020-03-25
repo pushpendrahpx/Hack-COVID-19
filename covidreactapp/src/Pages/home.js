@@ -7,12 +7,6 @@ class home extends Component {
         super(props)
 
 
-        navigator.geolocation.getCurrentPosition(function(location) {
-          console.log(location.coords.latitude);
-          console.log(location.coords.longitude);
-          console.log(location.coords.accuracy);
-        });
-
         let value = true;
         if(localStorage.getItem("isLoggedIn") == "true"){
             value = true;
@@ -21,20 +15,47 @@ class home extends Component {
         }
         this.state = {
             status:false,
-            isLoggedIn:value
+            isLoggedIn:value,
+
+            latitude:0,
+            longitude:0,
+            accuracy:0
     }
-    this.d();
+
+
+
     
+    this.getCurrentLocation = this.getCurrentLocation.bind(this)
 }
-    d = async ()=>{
-        let response = await fetch("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAEj-Grl6VVp4XLN1bBOkTaVj9VBIcFSvU",
-        {
-            method:"POST"
-        });
-        let data = await response.json();
-        console.log(data)
-    }  
-    
+
+
+getCurrentLocation = ()=>{
+          
+  var self = this;
+  navigator.geolocation.getCurrentPosition(function(location) {
+    // console.log(location.coords.latitude);
+    // console.log(location.coords.longitude);
+    // console.log(location.coords.accuracy );
+
+    self.lan = location.coords.latitude;
+    self.long = location.coords.longitude;
+    self.acc = location.coords.accuracy;
+    // console.log(self)
+  });
+  console.log(this.lan)
+  
+  this.setState({
+    latitude:this.lan,
+    longitude:this.long,
+    accuracy:this.acc
+  })
+
+
+
+
+  
+  } // End of GetCurrentLocation()
+
 
 
     toggle = ()=>{
@@ -121,7 +142,16 @@ class home extends Component {
         
         
       </nav>
-                      <MainHome />
+              <button className='button is-danger' onClick={this.getCurrentLocation}>get Location</button>
+
+              <table>
+                <tr>
+                  <th>latitude</th><th>longitude</th><th>Accuracy</th>
+                </tr>
+                <tr>
+            <td>{this.state.latitude}</td><td>{this.state.longitude}</td><td>{this.state.accuracy}</td>
+                </tr>
+              </table>
                     <article class="message is-primary">
                     <div class="message-header">
                         <p>Your Account Details</p>
