@@ -3,6 +3,9 @@ import './home.css';
 import { Link, Redirect } from 'react-router-dom';
 import MainHome from './HomeComponents/MainHome';
 import Map from './HomeComponents/Map'
+
+
+
 class home extends Component {
     constructor(props) {
         super(props)
@@ -20,9 +23,11 @@ class home extends Component {
 
             latitude:0,
             longitude:0,
-            accuracy:0
-    }
+            accuracy:0,
 
+            response: false,
+            endpoint: "http://localhost:5000/"
+    }
 
     console.log(new Date())
 
@@ -38,7 +43,7 @@ class home extends Component {
         this.getCurrentLocation();
       }
     },500)
-}
+} // end of constructor
 
 
 getCurrentLocation = ()=>{

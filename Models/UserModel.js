@@ -8,9 +8,14 @@ const UserSchema = new Schema({
     password:String,
     isVerifiedPhone:Boolean,
     isVerifiedEmail:Boolean,
+    lastScore:{value:Number,time:{type:Date},timeInstance:Number},
+    TotalScore:{value:Number},
+    ScoresList:[{value:Number,time:{type:Date},timeInstance:Number}],
     location:{
-        lattitude:{type:Number},
-        longitude:{type:Number}
+        last_lat:{value:Number,time:{type:Date},timeInstance:Number},
+        last_lng:{value:Number,time:{type:Date},timeInstance:Number},
+        lattitude:{value:Number,time:{type:Date},timeInstance:Number},
+        longitude:{value:Number,time:{type:Date},timeInstance:Number}
     }
 });
 

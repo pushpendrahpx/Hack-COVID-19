@@ -3,13 +3,15 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const router = express.Router();
 const mongoose = require("mongoose");
-
 const config = require("./config.json"); // Configuration Files Containes Connection Details With Database & Some Security KEYS
 
 // For Security Purpose We never ever Store Passwords in Plain Text
 const crypto = require("crypto");
 const uuid = require("uuid");
 
+//Sockets For Real Time Communication
+const Server = require('socket.io');
+const io = new Server();
 
 // To Accept JSON
 const bodyParser = require("body-parser");
@@ -46,6 +48,23 @@ app.get("/",(req,res)=>{
     res.status(400).json(new ErrorMessageClass(400,"This API Request is Invalid"));
 })
 
+
+
+function get(){
+    io.clients((err,clients)=>{
+        console.log(clients)
+    })
+}
+
+  
+
+io.on('connect',(socket)=>{
+    console.log(socket)
+
+    get()
+
+    socket.emit('FromAPI',{E:"E"})
+})
 app.listen(PORT,function(){
     console.log("Node Server Started At PORT="+PORT);
 })
