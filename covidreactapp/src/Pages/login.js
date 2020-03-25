@@ -8,6 +8,7 @@ class login extends Component {
     constructor(props) {
         super(props)
 
+       
 
         let loggedIn = false;
         if(localStorage.getItem("isLoggedIn") == "true"){
