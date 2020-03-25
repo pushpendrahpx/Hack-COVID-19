@@ -120,5 +120,9 @@ router.post('/login',(req,res)=>{
 })
 
 
+router.post('/update/:phone/location',(req,res)=>{
+    console.log(req.body)
+})
+
 
 module.exports = router;

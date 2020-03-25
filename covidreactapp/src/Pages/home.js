@@ -24,9 +24,20 @@ class home extends Component {
     }
 
 
+    console.log(new Date())
+
+
 
     
     this.getCurrentLocation = this.getCurrentLocation.bind(this)
+
+    this.getCurrentLocation()
+    let x = setTimeout(()=>{
+      
+      if(this.state.latitude == 0){
+        this.getCurrentLocation();
+      }
+    },500)
 }
 
 
