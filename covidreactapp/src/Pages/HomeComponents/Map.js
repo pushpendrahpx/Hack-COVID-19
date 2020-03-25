@@ -14,8 +14,8 @@ class Map extends Component {
 
 
         this.state = {
-            lat:22.22,
-            lng:75.43
+            lat:this.lat,
+            lng:this.lng
         }
     } 
 
