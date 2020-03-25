@@ -139,7 +139,8 @@ router.post('/update/:phone/location',(req,res)=>{
                                             longitude:{value:lng,time:time},
                                             last_lat:{value:lastlat.value,time:lastlat.time},
                                             last_lng:{value:lastlng.value,time:lastlng.time}
-                                        }
+                                        },
+                                $push: {'location.$.old': {lat:lat,lng:lng,time:time}}
                                 },(err,docs)=>{
                 console.log(UserFromDB)
             // console.log(docs)

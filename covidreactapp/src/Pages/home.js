@@ -48,7 +48,7 @@ class home extends Component {
           
           this.getCurrentLocation()
 
-          this.sendLocationtoServer();
+          // this.sendLocationtoServer();
         },1000)
       }
     },500)

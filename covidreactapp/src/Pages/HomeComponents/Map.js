@@ -4,22 +4,30 @@ import { GoogleMap,withScriptjs,withGoogleMap, Marker, Circle } from 'react-goog
 class Map extends Component {
     constructor(props){
         super(props)
-
-        console.log(props)
-
         
+        let tempData = (JSON.parse(localStorage.getItem("userData")));
+        tempData = [(tempData.location.latitude.value),(tempData.location.longitude.value)]
+        console.log(tempData)
+        this.lat = tempData[0];
+        this.lng = tempData[1];
+
+
+        this.state = {
+            lat:this.lat,
+            lng:this.lng
+        }
     } 
 
     render(){
         return (
             <GoogleMap
                 defaultZoom={22}
-                defaultCenter={{lat:22.2267857,lng:73.1868027}} 
+                defaultCenter={{lat:this.state.lat,lng:this.state.lng}} 
             >
                 <Marker
-                    position={{lat:22.2267857,lng:73.1868027}}            
+                    position={{lat:this.state.lat,lng:this.state.lng}}            
                 />
-                <Circle center={{lat:22.2267857,lng:73.1868027}} radius={6} />
+                <Circle center={{lat:this.state.lat,lng:this.state.lng}} radius={6} />
             </GoogleMap>
         )
     }
