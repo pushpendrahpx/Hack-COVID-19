@@ -51,6 +51,10 @@ class login extends Component {
         console.log(data) 
 
         if(data.statusCode == 200){
+
+            localStorage.setItem("userData",JSON.stringify(data.userData))
+
+
             localStorage.setItem("isLoggedIn",true);
             this.setState({
                 loggedIn:true
