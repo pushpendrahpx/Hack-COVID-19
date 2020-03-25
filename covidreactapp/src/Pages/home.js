@@ -48,7 +48,7 @@ class home extends Component {
           
           this.getCurrentLocation()
 
-          // this.sendLocationtoServer();
+          this.sendLocationtoServer();
         },1000)
       }
     },500)
@@ -67,8 +67,9 @@ sendLocationtoServer =  async ()=>{
     })
 
     let isUpdated = await response.json();
-
-    console.log(isUpdated)
+    // localStorage.setItem("userData")
+    localStorage.setItem("userData",JSON.stringify(isUpdated));
+    console.log("isUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdated",isUpdated)
 }
 
 getCurrentLocation = ()=>{
@@ -84,7 +85,8 @@ getCurrentLocation = ()=>{
     self.acc = location.coords.accuracy;
     // console.log(self)
   });
-  console.log(this.lan)
+  // console.log(this.lan)
+  
   
   this.setState({
     latitude:this.lan,

@@ -4,8 +4,9 @@ import { GoogleMap,withScriptjs,withGoogleMap, Marker, Circle } from 'react-goog
 class Map extends Component {
     constructor(props){
         super(props)
-        
+        // console.log(tempData)
         let tempData = (JSON.parse(localStorage.getItem("userData")));
+        console.log(tempData)
         tempData = [(tempData.location.latitude.value),(tempData.location.longitude.value)]
         console.log(tempData)
         this.lat = tempData[0];
@@ -13,8 +14,8 @@ class Map extends Component {
 
 
         this.state = {
-            lat:this.lat,
-            lng:this.lng
+            lat:22.22,
+            lng:75.43
         }
     } 
 
