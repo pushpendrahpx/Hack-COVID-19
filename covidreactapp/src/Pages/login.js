@@ -80,6 +80,9 @@ class login extends Component {
                 <Navbar />
                 {this.state.isPending == true ? <progress class="progress is-small is-primary" max="100">15%</progress>:''}
                 <form style={{padding:"20px"}} onSubmit={this.onSubmit}>
+                    <small>
+                        Please give us Location Access, so that we can give you our best services
+                    </small>
                 <center style={{fontSize:'50px',fontWeight:200}}>Login Form</center>
                 <div class="field">
                     <label class="label">Phone</label>
