@@ -8,7 +8,7 @@ class logout extends Component {
         localStorage.setItem("isLoggedIn",false)
         localStorage.setItem("userData","")
         this.state = {
-                 
+                m:""
         }
         this.get()
 
@@ -18,6 +18,7 @@ class logout extends Component {
         let d = await re.json()
         console.log(d)
         alert(JSON.parse(d));
+        this.setState({m:"GIT IT"})
       }
     render() {
         return (
@@ -26,6 +27,11 @@ class logout extends Component {
                 Logout
                 
                 <Link to='/'>Go To Login Page</Link>
+
+                <br />
+                {
+                    this.state.m
+                }
             </div>
         )
     }
