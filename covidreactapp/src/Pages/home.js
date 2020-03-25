@@ -36,19 +36,40 @@ class home extends Component {
       
     this.getCurrentLocation = this.getCurrentLocation.bind(this)
 
-    this.getCurrentLocation()
-    let x = setTimeout(()=>{
+    this.getCurrentLocation();
+
+    setTimeout(()=>{
       
       if(this.state.latitude == 0){
         this.getCurrentLocation();
 
         setInterval(()=>{
+
+          
           this.getCurrentLocation()
+
+          this.sendLocationtoServer();
         },1000)
       }
     },500)
 } // end of constructor
 
+sendLocationtoServer =  async ()=>{
+
+  let rawData = JSON.parse(localStorage.getItem("userData"));
+  
+    let response = await fetch('/api/users/update/'+rawData.phone+'/location',{
+      method:"POST",
+      headers:{
+        'Content-type':'Application/json'
+      },
+      body:JSON.stringify({lat:this.state.latitude,lng:this.state.longitude,time:new Date()})
+    })
+
+    let isUpdated = await response.json();
+
+    console.log(isUpdated)
+}
 
 getCurrentLocation = ()=>{
           
@@ -163,6 +184,7 @@ getCurrentLocation = ()=>{
         
         
       </nav>
+              <center>
               <button className='button is-danger' onClick={this.getCurrentLocation}>get Location</button>
 
               <table>
@@ -170,9 +192,10 @@ getCurrentLocation = ()=>{
                   <th>latitude</th><th>longitude</th><th>Accuracy</th>
                 </tr>
                 <tr>
-            <td>{this.state.latitude}</td><td>{this.state.longitude}</td><td>{this.state.accuracy}</td>
+              <td>{this.state.latitude}</td><td>{this.state.longitude}</td><td>{this.state.accuracy}</td>
                 </tr>
               </table>
+              </center>
                     <article class="message is-primary">
                     <div class="message-header">
                         <p>Your Account Details</p>

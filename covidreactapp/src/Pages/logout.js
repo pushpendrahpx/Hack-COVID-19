@@ -6,6 +6,7 @@ class logout extends Component {
     constructor(props) {
         super(props)
         localStorage.setItem("isLoggedIn",false)
+        localStorage.setItem("userData","")
         this.state = {
                  
         }

@@ -120,15 +120,19 @@ router.post('/login',(req,res)=>{
 })
 
 
-router.get('/update/:phone/location',(req,res)=>{
+router.post('/update/:phone/location',(req,res)=>{
     let {phone} = req.params;
+    let lat = req.body.lat;
+    let lng = req.body.lng;
+    let time = req.body.time;
+    console.log("Latitude = "+lat+ ", Longitude = " + lng +" Time = "+ time);
 
     let UserModel = require("./../Models/UserModel");
     UserModel.findOne({phone:phone},(error,UserFromDB)=>{
 
         UserFromDB.updateOne({email:"pushpendra.hpx2001@gmail.com"},(err,docs)=>{
                 
-            console.log(docs)
+            // console.log(docs)
         res.json(UserFromDB)
         })
     })
