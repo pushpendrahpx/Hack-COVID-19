@@ -207,7 +207,6 @@ getCurrentLocation = ()=>{
       </a>
     </article>
 
-    <GoogleMaps latitude={this.state.latitude} longitude={this.state.longitude}  />
                 </div>
             )
         }

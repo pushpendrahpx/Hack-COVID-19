@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 export default class MainHome extends Component {
+    
    render() {
        // center the map somewhere in London
        const center = {
