@@ -2,8 +2,12 @@ package com.koronakiller.geolocation.utils;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -28,15 +32,29 @@ public class HttpHelper {
             connection.setDoOutput(true);
             if (requestPackage != null && requestPackage.getMethod().equals("POST")) {
                 Log.d(TAG, "getJsonData: setting params");
+                Log.d(TAG, "getJsonData: " + requestPackage.getParams().get(KEY_USER_PARAMS).toJson());
                 OutputStream os = connection.getOutputStream();
-                byte[] input = requestPackage.getParams().get(KEY_USER_PARAMS).toJson().getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, StandardCharsets.UTF_8));
+                writer.write(requestPackage.getParams().get(KEY_USER_PARAMS).toJson());
+                writer.flush();
+                writer.close();
+                os.close();
             }
             connection.connect();
             int responseCode = connection.getResponseCode();
             Log.d(TAG, "getJsonData: Response code is " + responseCode);
-
-            return null;
+            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+                try (BufferedReader br = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+                    StringBuilder response = new StringBuilder();
+                    String responseLine = null;
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    Log.d(TAG, "getJsonData: data = " + response.toString());
+                    return response.toString();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

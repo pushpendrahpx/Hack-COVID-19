@@ -19,30 +19,34 @@ public class User implements Parcelable {
     };
     private static User userInstance;
     private String id;
-    private String userName;
+    private String name;
     private String password;
-    private String phoneNo;
-    private String emailId;
+    private String phone;
+    private String email;
 
     private User() {
     }
 
     protected User(Parcel in) {
         this.id = in.readString();
-        this.userName = in.readString();
+        this.name = in.readString();
         this.password = in.readString();
-        this.phoneNo = in.readString();
-        this.emailId = in.readString();
+        this.phone = in.readString();
+        this.email = in.readString();
     }
 
     public static User getUser(String userName, String password, String phoneNo, String emailId) {
         if (userInstance == null) {
             userInstance = new User();
-            userInstance.userName = userName;
+            userInstance.name = userName;
             userInstance.password = password;
-            userInstance.phoneNo = phoneNo;
-            userInstance.emailId = emailId;
+            userInstance.phone = phoneNo;
+            userInstance.email = emailId;
         }
+        userInstance.name = userName;
+        userInstance.password = password;
+        userInstance.phone = phoneNo;
+        userInstance.email = emailId;
         return userInstance;
     }
 
@@ -54,8 +58,8 @@ public class User implements Parcelable {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
     public String getPassword() {
@@ -63,11 +67,11 @@ public class User implements Parcelable {
     }
 
     public String getPhoneNo() {
-        return phoneNo;
+        return phone;
     }
 
     public String getEmailId() {
-        return emailId;
+        return email;
     }
 
     @Override
@@ -78,10 +82,10 @@ public class User implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.id);
-        dest.writeString(this.userName);
+        dest.writeString(this.name);
         dest.writeString(this.password);
-        dest.writeString(this.phoneNo);
-        dest.writeString(this.emailId);
+        dest.writeString(this.phone);
+        dest.writeString(this.email);
     }
 
     public String toJson() {
