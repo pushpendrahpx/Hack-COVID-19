@@ -33,7 +33,7 @@ class home extends Component {
 
 
 
-    
+      
     this.getCurrentLocation = this.getCurrentLocation.bind(this)
 
     this.getCurrentLocation()
@@ -41,6 +41,10 @@ class home extends Component {
       
       if(this.state.latitude == 0){
         this.getCurrentLocation();
+
+        setInterval(()=>{
+          this.getCurrentLocation()
+        },1000)
       }
     },500)
 } // end of constructor
