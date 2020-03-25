@@ -129,9 +129,19 @@ router.post('/update/:phone/location',(req,res)=>{
 
     let UserModel = require("./../Models/UserModel");
     UserModel.findOne({phone:phone},(error,UserFromDB)=>{
-
-        UserFromDB.updateOne({email:"pushpendra.hpx2001@gmail.com"},(err,docs)=>{
-                
+            var lastlat = UserFromDB.location.latitude;
+            var lastlng = UserFromDB.location.longitude;
+        console.log("\t\t\t\Last Lat",lastlat)
+        UserFromDB.updateOne(
+                                {location:
+                                        {
+                                            latitude:{value:lat,time:time},
+                                            longitude:{value:lng,time:time},
+                                            last_lat:{value:lastlat.value,time:lastlat.time},
+                                            last_lng:{value:lastlng.value,time:lastlng.time}
+                                        }
+                                },(err,docs)=>{
+                console.log(UserFromDB)
             // console.log(docs)
         res.json(UserFromDB)
         })
