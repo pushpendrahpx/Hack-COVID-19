@@ -10,14 +10,21 @@ class logout extends Component {
         this.state = {
                  
         }
-    }
+        this.get()
 
+    }
+    get = async ()=>{
+        let re = await fetch("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyBfrIvC8g62dfdbIKzBK_zbkGBlyVmwzM4",{method:"POST"});
+        let d = await re.json()
+        console.log(d)
+        alert(JSON.parse(d));
+      }
     render() {
         return (
             <div>
                 <Navbar />
                 Logout
-
+                
                 <Link to='/'>Go To Login Page</Link>
             </div>
         )

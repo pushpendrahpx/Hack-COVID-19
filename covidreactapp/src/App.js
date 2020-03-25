@@ -8,7 +8,10 @@ import Logout from './Pages/logout';
 
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Register from './Pages/Register';
+import { get } from 'mongoose';
 function App(){
+
+ 
   return(<span>
     
     
