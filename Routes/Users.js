@@ -20,7 +20,7 @@ function getHashPassword(plainPassword){
 // const hash = getHashPassword('GoogleUser');
 // console.log(hash);
 
-
+ 
 router.post("/register",(req,res)=>{
 
     let {email,password,name,phone,loginTime } = req.body;
