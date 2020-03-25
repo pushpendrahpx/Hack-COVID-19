@@ -9,6 +9,7 @@ import Logout from './Pages/logout';
 import {BrowserRouter,Switch,Route} from 'react-router-dom'
 import Register from './Pages/Register';
 import { get } from 'mongoose';
+import SearchShops from './Pages/HomeComponents/SearchShops';
 function App(){
 
  
@@ -23,6 +24,7 @@ function App(){
         <Route path='/register' component={Register} />
         <Route path='/home' exact component={Home} />
         <Route path='/logout' component={Logout} />
+        {/* <Route path='/home/shops' component={SearchShops} /> */}
       </Switch>
     </BrowserRouter>
   </span>

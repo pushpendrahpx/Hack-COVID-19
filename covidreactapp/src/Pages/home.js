@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import './home.css';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, BrowserRouter, Switch, Route } from 'react-router-dom';
 import Map from './HomeComponents/Map'
 import Details from './HomeComponents/Details';
+import SearchShops from './HomeComponents/SearchShops';
 
 
 
@@ -191,7 +192,14 @@ getCurrentLocation = ()=>{
         
         
       </nav>
-              <center style={{margin:'2px',boxShadow:'0 0 2px grey',padding:'20px',margin:'20px'}}>
+      <br />
+<BrowserRouter>
+              <Route path='/home/shops' component={SearchShops} />
+</BrowserRouter>
+
+              
+              {/* <center style={{margin:'2px',boxShadow:'0 0 2px grey',padding:'20px',margin:'20px'}}>
+
               <button className='button is-danger waves-effect' onClick={this.getCurrentLocation}>get Location</button>
 
               <table>
@@ -225,7 +233,7 @@ getCurrentLocation = ()=>{
         
       </a>
     </article>
-                <Map />
+                <Map /> */}
                 </div>
             )
         }
