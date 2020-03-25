@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './home.css';
 import { Link, Redirect } from 'react-router-dom';
-import MainHome from './HomeComponents/MainHome';
 import Map from './HomeComponents/Map'
 import Details from './HomeComponents/Details';
 
@@ -57,7 +56,9 @@ class home extends Component {
       }
     },500)
 } // end of constructor
+getUsers = ()=>{
 
+}
 sendLocationtoServer =  async ()=>{
 
   let rawData = JSON.parse(localStorage.getItem("userData"));
@@ -126,9 +127,9 @@ getCurrentLocation = ()=>{
             return (
                 <div
                 >
-                    <nav className="navbar" role="navigation" aria-label="main navigation">
+                    <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <a className="navbar-item" href="/" style={{fontSize:"40px",fontWeight:200}}>
+          <a className="navbar-item waves-effect" href="/" style={{fontSize:"40px",fontWeight:200,position:"relative",width:"80%"}}>
             Stay Quaratine
           </a>
       
@@ -190,12 +191,12 @@ getCurrentLocation = ()=>{
         
         
       </nav>
-              <center>
-              <button className='button is-danger' onClick={this.getCurrentLocation}>get Location</button>
+              <center style={{margin:'2px',boxShadow:'0 0 2px grey',padding:'20px',margin:'20px'}}>
+              <button className='button is-danger waves-effect' onClick={this.getCurrentLocation}>get Location</button>
 
               <table>
                 <tr>
-                  <th>latitude</th><th>longitude</th><th>Accuracy</th>
+                  <th>Latitude</th><th>Longitude</th><th>Accuracy</th>
                 </tr>
                 <tr>
               <td>{this.state.latitude}</td><td>{this.state.longitude}</td><td>{this.state.accuracy}</td>
@@ -204,15 +205,8 @@ getCurrentLocation = ()=>{
               </center>
                     <Details data={this.LoggedUserData} />
     <article class="panel is-primary">
-      <p class="panel-heading">
-        Primary
-      </p>
-      <p class="panel-tabs">
-        <a class="is-active">All</a>
-        <a>Public</a>
-        <a>Private</a>
-        <a>Sources</a>
-        <a>Forks</a>
+      <p class="panel-heading waves-effect" style={{position:'relative',width:'100%'}}>
+        Leaderboard
       </p>
       <div class="panel-block">
         <p class="control has-icons-left">
@@ -222,29 +216,13 @@ getCurrentLocation = ()=>{
           </span>
         </p>
       </div>
-      <a class="panel-block is-active">
+      <a class="panel-block is-active waves-effect" style={{width:'100%',display:'inline-flex'}}>
         <span class="panel-icon">
-          <i class="fas fa-book" aria-hidden="true"></i>
+          <i class="fas fa-user-circle" aria-hidden="true"></i>
         </span>
-        bulma
-      </a>
-      <a class="panel-block">
-        <span class="panel-icon">
-          <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        marksheet
-      </a>
-      <a class="panel-block">
-        <span class="panel-icon">
-          <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        minireset.css
-      </a>
-      <a class="panel-block">
-        <span class="panel-icon">
-          <i class="fas fa-book" aria-hidden="true"></i>
-        </span>
-        jgthms.github.io
+        
+        <span>Bulma</span>
+        
       </a>
     </article>
                 <Map />

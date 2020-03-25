@@ -66,7 +66,7 @@ class Navbar extends Component {
             Stay Quaratine
           </Link>
       
-          <a href="#ToggleNavbar" role="button" onClick={this.toggle} className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <a href="#ToggleNavbar" role="button" onClick={this.toggle} className="navbar-burger burger waves-effect" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>

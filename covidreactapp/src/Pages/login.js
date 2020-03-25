@@ -107,7 +107,7 @@ class login extends Component {
                     </div>
                         <Link to='/register'>Create New Account</Link>
                     <div class="control">
-   <center> <button class="button is-primary">Submit</button></center>
+   <center> <button class="button is-primary waves-effect">Submit</button></center>
     </div>
             </form> 
             <hr />

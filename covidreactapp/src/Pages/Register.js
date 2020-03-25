@@ -120,7 +120,7 @@ class Register extends Component {
             <Link to='/'>Already have an Account</Link>
                 
                 <div class="control">
-                <center><button class="button is-primary">Submit</button></center>
+                <center><button class="button is-primary waves-effect">Submit</button></center>
                 </div>
         </form>
         </span>)
