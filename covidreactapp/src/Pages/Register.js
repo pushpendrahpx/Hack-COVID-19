@@ -46,7 +46,8 @@ class Register extends Component {
                 name:name,
                 email:email,
                 phone:phone,
-                password:password
+                password:password,
+                loginTime:new Date()
             })
         });
         let data = await response.json()

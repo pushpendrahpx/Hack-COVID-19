@@ -3,6 +3,7 @@ import './home.css';
 import { Link, Redirect } from 'react-router-dom';
 import MainHome from './HomeComponents/MainHome';
 import Map from './HomeComponents/Map'
+import Details from './HomeComponents/Details';
 
 
 
@@ -10,7 +11,7 @@ class home extends Component {
     constructor(props) {
         super(props)
 
-
+      
         let value = true;
         if(localStorage.getItem("isLoggedIn") == "true"){
             value = true;
@@ -26,14 +27,17 @@ class home extends Component {
             accuracy:0,
 
             response: false,
-            endpoint: "http://localhost:5000/"
+            endpoint: "http://localhost:5000/",
+            name:"",
+            email:"",
+            phone:0
     }
 
     console.log(new Date())
 
 
+    this.LoggedUserData = JSON.parse(localStorage.getItem("userData"));
 
-      
     this.getCurrentLocation = this.getCurrentLocation.bind(this)
 
     this.getCurrentLocation();
@@ -198,15 +202,7 @@ getCurrentLocation = ()=>{
                 </tr>
               </table>
               </center>
-                    <article class="message is-primary">
-                    <div class="message-header">
-                        <p>Your Account Details</p>
-                        <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-    
-                    </div>
-                    </article>
+                    <Details data={this.LoggedUserData} />
     <article class="panel is-primary">
       <p class="panel-heading">
         Primary

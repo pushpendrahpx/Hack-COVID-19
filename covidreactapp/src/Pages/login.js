@@ -7,6 +7,7 @@ import Navbar from '../Components/Navbar';
 class login extends Component {
     constructor(props) {
         super(props)
+        // localStorage.setItem("isLoggedIn","false");
 
         let loggedIn = false;
         if(localStorage.getItem("isLoggedIn") == "true"){
@@ -42,7 +43,8 @@ class login extends Component {
             method:"POST",
             body:JSON.stringify({
                 phone:phone,
-                password:password
+                password:password,
+                loginTime:new Date()
             })
         });
         let data = await response.json()
