@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './home.css';
 import { Link, Redirect } from 'react-router-dom';
 import MainHome from './HomeComponents/MainHome';
+import GoogleMaps from './HomeComponents/GoogleMaps';
 class home extends Component {
     constructor(props) {
         super(props)
@@ -205,6 +206,8 @@ getCurrentLocation = ()=>{
         jgthms.github.io
       </a>
     </article>
+
+    <GoogleMaps latitude={this.state.latitude} longitude={this.state.longitude}  />
                 </div>
             )
         }
