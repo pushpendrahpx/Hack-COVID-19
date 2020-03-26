@@ -30,8 +30,7 @@ class home extends Component {
             name:"",
             email:"",
             phone:0,
-            Leaderboard:[],
-            d:0
+            Leaderboard:[]
     }
 
     console.log(new Date())
@@ -42,7 +41,7 @@ class home extends Component {
     this.getCurrentLocation = this.getCurrentLocation.bind(this)
 
     this.getCurrentLocation();
-    
+
     setTimeout(()=>{
       
       if(this.state.latitude == 0){
@@ -52,10 +51,10 @@ class home extends Component {
 
           
           this.getCurrentLocation()
-          
+          this.getUsers();
           this.sendLocationtoServer();
 
-          
+
           
         },500)
       }
@@ -70,14 +69,14 @@ getUsers = async ()=>{
   let data = await re.json();
 
   this.setState({Leaderboard:data},()=>{
-    // console.log(this.state)
+    console.log(this.state)
   })
   
 }
 sendLocationtoServer =  async ()=>{
 
   let rawData = JSON.parse(localStorage.getItem("userData"));
-  // console.log("ACCURACY ====================/=========>>>>>>>>>>>>>>> "+this.state.accuracy)
+  console.log("ACCURACY =============================>>>>>>>>>>>>>>> "+this.state.accuracy)
     let response = await fetch('/api/users/update/'+rawData.phone+'/location',{
       method:"POST",
       headers:{
@@ -89,7 +88,7 @@ sendLocationtoServer =  async ()=>{
     let isUpdated = await response.json();
     // localStorage.setItem("userData")
     localStorage.setItem("userData",JSON.stringify(isUpdated));
-    // console.log("isUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdated",isUpdated)
+    console.log("isUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdated",isUpdated)
 }
 
 getCurrentLocation = ()=>{
@@ -129,12 +128,10 @@ getCurrentLocation = ()=>{
             this.setState({status:false})
         }
 
-        // console.log(this.state)
+        console.log(this.state)
     }
 
-    componentDidMount(){
-      window.stop();
-    }
+
 
     render() {
         if(this.state.isLoggedIn == false){
@@ -242,8 +239,8 @@ getCurrentLocation = ()=>{
           </span>
         </p>
       </div>
-      {/* {
-        this.state.Leaderboard.map(user=>{
+      {
+                this.state.Leaderboard.map(user=>{
                   return  <a class="panel-block is-active waves-effect" style={{width:'100%',display:'inline-flex'}}>
                   <span class="panel-icon">
                     <i class="fas fa-user-circle" aria-hidden="true"></i>
@@ -253,7 +250,7 @@ getCurrentLocation = ()=>{
                   
                 </a>
                 })
-              } */}
+              }
     </article>
                 <Map />
                 </div>
