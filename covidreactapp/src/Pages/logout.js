@@ -24,9 +24,8 @@ class logout extends Component {
         return (
             <div>
                 <Navbar />
-                Logout
-                
-                <Link to='/'>Go To Login Page</Link>
+                <br /><br />
+                <center><Link to='/' className='button'>Go To Login Page</Link></center>
 
                 <br />
                 {
