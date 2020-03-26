@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { GoogleMap,withScriptjs,withGoogleMap, Marker, Circle } from 'react-google-maps'
+import { GoogleMap,withScriptjs,withGoogleMap, Marker, Circle,LoadScript } from 'react-google-maps'
+// import { LoadScript } from 'react-google-maps/api';
+
 
 class Map extends Component {
     constructor(props){
@@ -21,7 +23,14 @@ class Map extends Component {
 
     render(){
         return (
-            <GoogleMap
+
+            <LoadScript
+        id="script-loader"
+        googleMapsApiKey="AIzaSyBfrIvC8g62dfdbIKzBK_zbkGBlyVmwzM4"
+        
+            >
+        
+          <GoogleMap
                 defaultZoom={22}
                 defaultCenter={{lat:this.state.lat,lng:this.state.lng}} 
             >
@@ -30,6 +39,8 @@ class Map extends Component {
                 />
                 <Circle center={{lat:this.state.lat,lng:this.state.lng}} radius={6} />
             </GoogleMap>
+      </LoadScript>
+            
         )
     }
 }
