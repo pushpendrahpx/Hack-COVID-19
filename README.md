@@ -12,6 +12,7 @@ Pull requests are welcome.
 3. Like for React App [ A Directory is there named, covidreactapp in which there are React Application Files
 4. Then make Pull Request and Admin Will review and Merge.
 
+# To 
 
 # To Run Node Server 
 1. ```
@@ -20,7 +21,10 @@ Pull requests are welcome.
 2. ```
     node index.js
    ```
-# To Run React App Server 
+3. Go to http://127.0.0.1:5000/
+    Server will be listening there, and React Build App Will run there
+    
+# Steps for building Android Application 
 1. ```
     cd covidreactapp
    ```
@@ -30,3 +34,7 @@ Pull requests are welcome.
 3. ```
     npm start  OR yarn start
    ```
+
+
+
+   

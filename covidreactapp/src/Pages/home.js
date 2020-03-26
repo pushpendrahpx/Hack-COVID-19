@@ -240,7 +240,7 @@ getCurrentLocation = ()=>{
           </span>
         </p>
       </div>
-      {
+      {/* {
         this.state.Leaderboard.map(user=>{
                   return  <a class="panel-block is-active waves-effect" style={{width:'100%',display:'inline-flex'}}>
                   <span class="panel-icon">
@@ -251,7 +251,7 @@ getCurrentLocation = ()=>{
                   
                 </a>
                 })
-              }
+              } */}
     </article>
                 <Map />
                 </div>
