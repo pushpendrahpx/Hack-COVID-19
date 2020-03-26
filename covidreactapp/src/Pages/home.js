@@ -29,8 +29,7 @@ class home extends Component {
             endpoint: "http://localhost:5000/",
             name:"",
             email:"",
-            phone:0,
-            Leaderboard:{}
+            phone:0
     }
 
     console.log(new Date())
@@ -56,21 +55,14 @@ class home extends Component {
         },1000)
       }
     },400)
-
-
-    
 } // end of constructor
-getUsers = async ()=>{
-  let re = await fetch("/api/users/getalloftheusers");
-  let data = await re.json();
+getUsers = ()=>{
 
-  this.setState({Leaderboard:data})
-  console.log("\n\n\\n\n\n\n LeaderBoard\n\n\n\data"+data)
 }
 sendLocationtoServer =  async ()=>{
 
   let rawData = JSON.parse(localStorage.getItem("userData"));
-  console.log("ACCURACY =============================>>>>>>>>>>>>>>> "+this.state.accuracy)
+  console.log("ACCURACY =============================>>>>>>>>>>>>>>>"+this.state.accuracy)
     let response = await fetch('/api/users/update/'+rawData.phone+'/location',{
       method:"POST",
       headers:{
