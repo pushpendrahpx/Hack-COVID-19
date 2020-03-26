@@ -343,6 +343,14 @@ router.post("/sethome/android",(req,res)=>{
 router.post('/update/points/android',(req,res)=>{
     let {locationCode,time,phone} = req.body;
     time = time.getTime()
+
+
+    
+
+    let UserModel = require("./../Models/UserModel");
+
+
+    
     // true,false
     switch(locationCode)
     {
@@ -350,8 +358,6 @@ router.post('/update/points/android',(req,res)=>{
                     let currTime = new Date()
                     currTime = currTime.getTime();
                     // console.log(currTime)
-
-                    let UserModel = require("./../Models/UserModel");
                     UserModel.findOne({phone:phone},(err,user)=>{
                         if(err)
                             res.status(800).json({error:"Server not able to find Single"})
@@ -374,7 +380,6 @@ router.post('/update/points/android',(req,res)=>{
                      break;
         case false : //  Outside
                         
-                        let UserModel = require("./../Models/UserModel");
                         UserModel.findOne({phone:phone},(err,user)=>{
                             if(err)
                                 res.status(800).json({error:"Server not able to find Single"})
