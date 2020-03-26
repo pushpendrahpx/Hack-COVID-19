@@ -123,34 +123,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         startGettingLocation();
         mMap.addMarker(new MarkerOptions().position(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude())).title("Marker in Sydney"));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), ZOOM_LEVEL));
-        tv.append("Lat : " + currentLocation.getLatitude() + "\n");
-        tv.append("Long : " + currentLocation.getLongitude() + "\n");
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mapView.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mapView.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mapView.onStop();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mapView.onPause();
-
-    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -172,9 +146,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void startGettingLocation() {
-//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-//                .findFragmentById(R.id.map);
-        //call back set
         if ((ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                 && (ActivityCompat.checkSelfPermission(MapsActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
             //get Location
@@ -223,6 +194,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        notificationManager.registerNotificationChannel();
 //        notificationManager.triggerNotification();
     }
+
 
 
     private void setUpGeoFence() {

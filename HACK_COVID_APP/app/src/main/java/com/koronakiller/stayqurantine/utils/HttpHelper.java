@@ -30,7 +30,7 @@ public class HttpHelper {
             connection.setConnectTimeout(10000);
             connection.setDoInput(true);
             connection.setDoOutput(true);
-            if (requestPackage != null && requestPackage.getMethod().equals("POST")) {
+            if (requestPackage.getParams() != null && requestPackage.getMethod().equals("POST")) {
                 Log.d(TAG, "getJsonData: setting params");
                 Log.d(TAG, "getJsonData: " + requestPackage.getParams().get(KEY_USER_PARAMS).toJson());
                 OutputStream os = connection.getOutputStream();
@@ -43,7 +43,7 @@ public class HttpHelper {
             connection.connect();
             int responseCode = connection.getResponseCode();
             Log.d(TAG, "getJsonData: Response code is " + responseCode);
-            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+            if (responseCode == 200) {
                 try (BufferedReader br = new BufferedReader(
                         new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
                     StringBuilder response = new StringBuilder();
@@ -56,6 +56,7 @@ public class HttpHelper {
                 }
             }
         } catch (Exception e) {
+            Log.i(TAG, "getJsonData: error");
             e.printStackTrace();
         }
 

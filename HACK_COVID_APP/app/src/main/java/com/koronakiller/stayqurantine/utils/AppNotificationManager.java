@@ -59,8 +59,8 @@ public class AppNotificationManager {
                 .setContentIntent(pi)
                 .setContentInfo("today this mobile is Lunched")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText("thus s asdadad  adasfa ssf fasda srwdawrq j jzsdfgdAXD VDAW"))
-                .setPriority(NotificationManagerCompat.IMPORTANCE_HIGH);
-//                .setSmallIcon(R.drawable.ic_my_location_black_24dp);
+                .setPriority(NotificationManagerCompat.IMPORTANCE_HIGH)
+                .setSmallIcon(R.drawable.ic_launcher_foreground);
 //                .setOngoing(true);
         try {
             notificationManagerCompat.notify(0, builder.build());
