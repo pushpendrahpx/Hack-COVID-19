@@ -30,7 +30,7 @@ class home extends Component {
             name:"",
             email:"",
             phone:0,
-            Leaderboard:[]
+            Leaderboard:{}
     }
 
     console.log(new Date())
@@ -51,27 +51,21 @@ class home extends Component {
 
           
           this.getCurrentLocation()
-          this.getUsers();
+
           this.sendLocationtoServer();
-
-
-          
-        },500)
+        },1000)
       }
     },400)
 
+
     
-
-
 } // end of constructor
 getUsers = async ()=>{
   let re = await fetch("/api/users/getalloftheusers");
   let data = await re.json();
 
-  this.setState({Leaderboard:data},()=>{
-    console.log(this.state)
-  })
-  
+  this.setState({Leaderboard:data})
+  console.log("\n\n\\n\n\n\n LeaderBoard\n\n\n\data"+data)
 }
 sendLocationtoServer =  async ()=>{
 
@@ -239,18 +233,14 @@ getCurrentLocation = ()=>{
           </span>
         </p>
       </div>
-      {
-                this.state.Leaderboard.map(user=>{
-                  return  <a class="panel-block is-active waves-effect" style={{width:'100%',display:'inline-flex'}}>
-                  <span class="panel-icon">
-                    <i class="fas fa-user-circle" aria-hidden="true"></i>
-                  </span>
-                  
-                  <span>{user.name}</span>
-                  
-                </a>
-                })
-              }
+      <a class="panel-block is-active waves-effect" style={{width:'100%',display:'inline-flex'}}>
+        <span class="panel-icon">
+          <i class="fas fa-user-circle" aria-hidden="true"></i>
+        </span>
+        
+        <span>Bulma</span>
+        
+      </a>
     </article>
                 <Map />
                 </div>
