@@ -198,7 +198,7 @@ getCurrentLocation = ()=>{
 </BrowserRouter>
 
               
-              {/* <center style={{margin:'2px',boxShadow:'0 0 2px grey',padding:'20px',margin:'20px'}}>
+              <center style={{margin:'2px',boxShadow:'0 0 2px grey',padding:'20px',margin:'20px'}}>
 
               <button className='button is-danger waves-effect' onClick={this.getCurrentLocation}>get Location</button>
 
@@ -233,7 +233,7 @@ getCurrentLocation = ()=>{
         
       </a>
     </article>
-                <Map /> */}
+                <Map />
                 </div>
             )
         }
