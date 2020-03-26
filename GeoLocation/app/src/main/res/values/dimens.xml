@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="text_view_header_size">15sp</dimen>
-    <dimen name="edit_text_user_input_width">250dp</dimen>
-    <dimen name="already_user">20sp</dimen>
-</resources>
