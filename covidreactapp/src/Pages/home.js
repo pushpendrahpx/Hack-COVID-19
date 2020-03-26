@@ -29,7 +29,9 @@ class home extends Component {
             endpoint: "http://localhost:5000/",
             name:"",
             email:"",
-            phone:0
+            phone:0,
+            Leaderboard:[],
+            d:0
     }
 
     console.log(new Date())
@@ -40,29 +42,42 @@ class home extends Component {
     this.getCurrentLocation = this.getCurrentLocation.bind(this)
 
     this.getCurrentLocation();
-
+    
     setTimeout(()=>{
       
       if(this.state.latitude == 0){
         this.getCurrentLocation();
 
-        setInterval(()=>{
+        // setInterval(()=>{
 
           
-          this.getCurrentLocation()
+        //   this.getCurrentLocation()
+          
+        //   this.sendLocationtoServer();
 
-          this.sendLocationtoServer();
-        },1000)
+          
+          
+        // },500)
       }
     },400)
-} // end of constructor
-getUsers = ()=>{
 
+    
+
+
+} // end of constructor
+getUsers = async ()=>{
+  let re = await fetch("/api/users/getalloftheusers");
+  let data = await re.json();
+
+  this.setState({Leaderboard:data},()=>{
+    // console.log(this.state)
+  })
+  
 }
 sendLocationtoServer =  async ()=>{
 
   let rawData = JSON.parse(localStorage.getItem("userData"));
-  console.log("ACCURACY =============================>>>>>>>>>>>>>>>"+this.state.accuracy)
+  // console.log("ACCURACY ====================/=========>>>>>>>>>>>>>>> "+this.state.accuracy)
     let response = await fetch('/api/users/update/'+rawData.phone+'/location',{
       method:"POST",
       headers:{
@@ -74,7 +89,7 @@ sendLocationtoServer =  async ()=>{
     let isUpdated = await response.json();
     // localStorage.setItem("userData")
     localStorage.setItem("userData",JSON.stringify(isUpdated));
-    console.log("isUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdated",isUpdated)
+    // console.log("isUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdated",isUpdated)
 }
 
 getCurrentLocation = ()=>{
@@ -114,9 +129,8 @@ getCurrentLocation = ()=>{
             this.setState({status:false})
         }
 
-        console.log(this.state)
+        // console.log(this.state)
     }
-
 
 
     render() {
@@ -225,14 +239,18 @@ getCurrentLocation = ()=>{
           </span>
         </p>
       </div>
-      <a class="panel-block is-active waves-effect" style={{width:'100%',display:'inline-flex'}}>
-        <span class="panel-icon">
-          <i class="fas fa-user-circle" aria-hidden="true"></i>
-        </span>
-        
-        <span>Bulma</span>
-        
-      </a>
+      {
+        this.state.Leaderboard.map(user=>{
+                  return  <a class="panel-block is-active waves-effect" style={{width:'100%',display:'inline-flex'}}>
+                  <span class="panel-icon">
+                    <i class="fas fa-user-circle" aria-hidden="true"></i>
+                  </span>
+                  
+                  <span>{user.name}</span>
+                  
+                </a>
+                })
+              }
     </article>
                 <Map />
                 </div>

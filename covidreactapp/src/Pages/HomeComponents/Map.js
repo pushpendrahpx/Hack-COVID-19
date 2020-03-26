@@ -24,12 +24,6 @@ class Map extends Component {
     render(){
         return (
 
-            <LoadScript
-        id="script-loader"
-        googleMapsApiKey="AIzaSyBfrIvC8g62dfdbIKzBK_zbkGBlyVmwzM4"
-        
-            >
-        
           <GoogleMap
                 defaultZoom={22}
                 defaultCenter={{lat:this.state.lat,lng:this.state.lng}} 
@@ -39,7 +33,6 @@ class Map extends Component {
                 />
                 <Circle center={{lat:this.state.lat,lng:this.state.lng}} radius={6} />
             </GoogleMap>
-      </LoadScript>
             
         )
     }
