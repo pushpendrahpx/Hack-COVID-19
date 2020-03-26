@@ -55,9 +55,7 @@ class home extends Component {
           this.getUsers();
           this.sendLocationtoServer();
 
-          this.setState({d:1},()=>{
-            console.clear();
-          })
+        
           
         },500)
       }
@@ -72,14 +70,14 @@ getUsers = async ()=>{
   let data = await re.json();
 
   this.setState({Leaderboard:data},()=>{
-    console.log(this.state)
+    // console.log(this.state)
   })
   
 }
 sendLocationtoServer =  async ()=>{
 
   let rawData = JSON.parse(localStorage.getItem("userData"));
-  console.log("ACCURACY =============================>>>>>>>>>>>>>>> "+this.state.accuracy)
+  // console.log("ACCURACY ====================/=========>>>>>>>>>>>>>>> "+this.state.accuracy)
     let response = await fetch('/api/users/update/'+rawData.phone+'/location',{
       method:"POST",
       headers:{
@@ -91,7 +89,7 @@ sendLocationtoServer =  async ()=>{
     let isUpdated = await response.json();
     // localStorage.setItem("userData")
     localStorage.setItem("userData",JSON.stringify(isUpdated));
-    console.log("isUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdated",isUpdated)
+    // console.log("isUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdatedisUpdated",isUpdated)
 }
 
 getCurrentLocation = ()=>{
@@ -131,7 +129,7 @@ getCurrentLocation = ()=>{
             this.setState({status:false})
         }
 
-        console.log(this.state)
+        // console.log(this.state)
     }
 
 
