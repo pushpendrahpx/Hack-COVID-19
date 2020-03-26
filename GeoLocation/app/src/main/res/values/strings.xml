@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">stay qurantine</string>
+    <string name="app_name">GeoLocation</string>
     <string name="already_user_login_here">Already User? LogIn here</string>
     <string name="enter_your_phone_no">Enter your phone no</string>
     <string name="user_name">User Name</string>
@@ -12,9 +12,7 @@
     <string name="hint_user_name">User Name</string>
     <string name="email_id">Email Id</string>
     <string name="hint_enter_your_email_id">Enter Your Email Id</string>
-
     <string name="id_tech_channel_name">Notification</string>
     <string name="tech_channel_description">des</string>
     <string name="tech_channel_name">Notification</string>
-
 </resources>
