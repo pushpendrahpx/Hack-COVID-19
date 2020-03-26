@@ -12,12 +12,18 @@ const UserSchema = new Schema({
     lastScore:{value:Number,time:{type:Date},timeInstance:Number},
     TotalScore:{value:Number},
     ScoresList:[{value:Number,time:{type:Date},timeInstance:Number}],
+    homeLocation:{
+        lat:Number,
+        lng:Number,
+        time:Date,
+        Accuracy:Number,
+    },
     location:{
-        old:[{lat:Number,lng:Number,time:Date,StringTime:String}],
-        last_lat:{value:Number,time:{type:Date},timeInstance:Number},
-        last_lng:{value:Number,time:{type:Date},timeInstance:Number},
-        latitude:{value:Number,time:{type:Date},timeInstance:Number},
-        longitude:{value:Number,time:{type:Date},timeInstance:Number}
+        old:[{lat:Number,lng:Number,time:Date,StringTime:String,Accuracy:Number}],
+        last_lat:{value:Number,time:{type:Date},timeInstance:Number,Accuracy:Number},
+        last_lng:{value:Number,time:{type:Date},timeInstance:Number,Accuracy:Number},
+        latitude:{value:Number,time:{type:Date},timeInstance:Number,Accuracy:Number},
+        longitude:{value:Number,time:{type:Date},timeInstance:Number,Accuracy:Number}
     }
 });
 

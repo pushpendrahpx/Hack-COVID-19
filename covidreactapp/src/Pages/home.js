@@ -54,7 +54,7 @@ class home extends Component {
           this.sendLocationtoServer();
         },1000)
       }
-    },500)
+    },400)
 } // end of constructor
 getUsers = ()=>{
 
@@ -68,7 +68,7 @@ sendLocationtoServer =  async ()=>{
       headers:{
         'Content-type':'Application/json'
       },
-      body:JSON.stringify({lat:this.state.latitude,lng:this.state.longitude,time:new Date()})
+      body:JSON.stringify({lat:this.state.latitude,lng:this.state.longitude,time:new Date(),accuracy:this.state.accuracy})
     })
 
     let isUpdated = await response.json();

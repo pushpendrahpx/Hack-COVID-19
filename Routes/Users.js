@@ -67,7 +67,7 @@ router.get('/getalloftheusers',(req,res)=>{
 
 })
 router.post('/login',(req,res)=>{
-    let {phone,password,loginTime} = req.body;
+    let {phone,password,loginTime,Accuracy} = req.body;
     try{
         console.log("\n\n Recording Body");
         console.log(req.body);
@@ -76,7 +76,7 @@ router.post('/login',(req,res)=>{
         if(phone.length == 10 && password.length >= 6){
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
-            let User = new UserModel({phone:phone,password:password,lastLoginTime:loginTime});
+            let User = new UserModel({phone:phone,password:password,lastLoginTime:loginTime,});
             UserModel.findOne({phone:phone},(err,users)=>{
                 if(err){
                     res.status(402).json({
@@ -126,27 +126,58 @@ router.post('/update/:phone/location',(req,res)=>{
     let lat = req.body.lat;
     let lng = req.body.lng;
     let time = req.body.time;
-    console.log("Latitude = "+lat+ ", Longitude = " + lng +" Time = "+ time);
+    let acc = req.body.time;
+
+
+    console.log("Latitude = "+lat+ ", Longitude = " + lng +" Time = "+ time + " with Accuracy = "+acc);
 
     let UserModel = require("./../Models/UserModel");
     UserModel.findOne({phone:phone},(error,UserFromDB)=>{
             var lastlat = UserFromDB.location.latitude;
             var lastlng = UserFromDB.location.longitude;
         console.log("\t\t\t\Last Lat",lastlat)
-        UserFromDB.updateOne(
-                                {location:
-                                        {
-                                            latitude:{value:lat,time:time},
-                                            longitude:{value:lng,time:time},
-                                            last_lat:{value:lastlat.value,time:lastlat.time},
-                                            last_lng:{value:lastlng.value,time:lastlng.time}
-                                        },
-                                $push: {'location.$.old': {lat:lat,lng:lng,time:time}}
-                                },(err,docs)=>{
-                console.log(UserFromDB)
-            // console.log(docs)
+            let FinalAccuracy = 0;
+        if(UserFromDB.homeLocation >= acc){
+                FinalAccuracy = acc; 
+
+                UserFromDB.updateOne(
+                    {location:
+                            {
+                                latitude:{value:lat,time:time},
+                                longitude:{value:lng,time:time},
+                                last_lat:{value:lastlat.value,time:lastlat.time},
+                                last_lng:{value:lastlng.value,time:lastlng.time}
+                            },
+                            homeLocation:{lat:lat,lng:lng,time:time,},
+                    $push: {'location.$.old': {lat:lat,lng:lng,time:time}}
+                    },(err,docs)=>{
+        console.log(UserFromDB)
+        // console.log(docs)
         res.json(UserFromDB)
         })
+        }else{
+            UserFromDB.updateOne(
+                {location:
+                        {
+                            latitude:{value:lat,time:time},
+                            longitude:{value:lng,time:time},
+                            last_lat:{value:lastlat.value,time:lastlat.time},
+                            last_lng:{value:lastlng.value,time:lastlng.time}
+                        },
+                 homeLocation:{lat:UserFromDB.location.latitude.value,lng:UserFromDB.location.longitude.value,time:UserFromDB.location.latitude.time,Accuracy:UserFromDB.location.latitude.Accuracy},
+                $push: {'location.$.old': {lat:lat,lng:lng,time:time}}
+                },(err,docs)=>{
+    console.log(UserFromDB)
+    // console.log(docs)
+    res.json(UserFromDB)
+    })
+        }
+
+
+       
+
+
+                    
     })
     
 })
