@@ -48,20 +48,20 @@ class home extends Component {
       if(this.state.latitude == 0){
         this.getCurrentLocation();
 
-        // setInterval(()=>{
+        setInterval(()=>{
 
           
-        //   this.getCurrentLocation()
+          this.getCurrentLocation()
           
-        //   this.sendLocationtoServer();
+          this.sendLocationtoServer();
 
           
-          
-        // },500)
+        },500)
       }
     },400)
 
     
+    this.getUsers();
 
 
 } // end of constructor
