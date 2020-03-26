@@ -18,6 +18,8 @@ const UserSchema = new Schema({
         time:Date,
         Accuracy:Number,
     },
+    locationCode:Boolean,
+    locationUpdateTime:Date,
     location:{
         old:[{lat:Number,lng:Number,time:Date,StringTime:String,Accuracy:Number}],
         last_lat:{value:Number,time:{type:Date},timeInstance:Number,Accuracy:Number},

@@ -197,7 +197,7 @@ router.post("/register/android",(req,res)=>{
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
             let User = new UserModel({name:name,phone:phone,email:email,password:password,lastLoginTime:loginTime,isVerifiedPhone:false,
-                isVerifiedEmail:false});
+                isVerifiedEmail:false,locationUpdateTime:new Date(),locationCode:0});
             UserModel.countDocuments({phone:phone},(err,users)=>{
                 if(users == 0){
                     User.save().then(doc=>{
@@ -240,7 +240,7 @@ router.post('/login/android',(req,res)=>{
         if(phone.length == 10 && password.length >= 6){
             password = getHashPassword(password);
             let UserModel = require("./../Models/UserModel");
-            let User = new UserModel({phone:phone,password:password,lastLoginTime:loginTime});
+            let User = new UserModel({phone:phone,password:password,lastLoginTime:loginTime,locationUpdateTime:new Date(),locationCode:0});
             UserModel.findOne({phone:phone},(err,users)=>{
                 if(err){
                     res.status(402).json({
@@ -314,5 +314,92 @@ router.post('/update/:phone/location/android',(req,res)=>{
     
 })
 
+router.post("/sethome/android",(req,res)=>{
+    let { lat,lng,time,phone,acc } = req.body;
+    let UserModel = require("./../Models/UserModel");
 
+    UserModel.findOne({phone:phone},(error,user)=>{
+        if(error){
+            res.status(403).json({error:"Server Crashed"});
+        }
+        console.log(user)
+        user.updateOne({
+            homeLocation:{
+                lat:lat,
+                lng:lng,
+                time:time,
+                Accuracy:acc
+            }
+        },(err,docs)=>{
+
+            // console.log("Time in Secs",Date.parse(time),time)
+            if(!err)
+                res.status(200).json({statusCode:200,message:"UPdated"});
+            else 
+                res.status(401).json({error:"Server Error /After Update"})
+        })
+    })
+})
+router.post('/update/points/android',(req,res)=>{
+    let {locationCode,time,phone} = req.body;
+    time = time.getTime()
+    // true,false
+    switch(locationCode)
+    {
+        case true :  // Inside
+                    let currTime = new Date()
+                    currTime = currTime.getTime();
+                    // console.log(currTime)
+
+                    let UserModel = require("./../Models/UserModel");
+                    UserModel.findOne({phone:phone},(err,user)=>{
+                        if(err)
+                            res.status(800).json({error:"Server not able to find Single"})
+                        let userlocation = user.locationCode;
+                        if(userlocation == true){
+                            res.status(900).json({
+                                error:"This is not possible as user is Already inside circle"
+                            })
+                            
+                        }else{
+                            let lastUserTime = user.locationUpdateTime()
+                            lastUserTime = lastUserTime.getTime();
+                            console.log(lastUserTime)
+                            let newScore = user.TotalScore + 2*(time - lastUserTime)
+                            user.updateOne({TotalScore:newScore,lastUserTime:time,locationCode:false})
+                        }
+                    })
+
+                    
+                     break;
+        case false : //  Outside
+                        
+                        let UserModel = require("./../Models/UserModel");
+                        UserModel.findOne({phone:phone},(err,user)=>{
+                            if(err)
+                                res.status(800).json({error:"Server not able to find Single"})
+                            let userlocation = user.locationCode;
+                            if(userlocation == true){
+
+                                let lastUserTime = user.locationUpdateTime()
+                                lastUserTime = lastUserTime.getTime();
+                                console.log(lastUserTime)
+                                let newScore = user.TotalScore + 2*(time - lastUserTime)
+                                user.updateOne({TotalScore:newScore,lastUserTime:time,locationCode:false})
+
+
+                                
+                                
+                            }else{
+                                
+                                res.status(900).json({
+                                    error:"This is not possible as user is Already inside circle"
+                                })
+                            }
+                        })
+                    break;
+
+        default : console.log("Some Default Case Running"); res.status(500).json({error:"Switch Case's default Running"})
+    }
+})
 module.exports = router;
