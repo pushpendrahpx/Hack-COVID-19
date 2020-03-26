@@ -62,7 +62,7 @@ getUsers = ()=>{
 sendLocationtoServer =  async ()=>{
 
   let rawData = JSON.parse(localStorage.getItem("userData"));
-  
+  console.log("ACCURACY =============================>>>>>>>>>>>>>>> "+this.state.accuracy)
     let response = await fetch('/api/users/update/'+rawData.phone+'/location',{
       method:"POST",
       headers:{
@@ -91,8 +91,7 @@ getCurrentLocation = ()=>{
     // console.log(self)
   });
   // console.log(this.lan)
-  
-  
+
   this.setState({
     latitude:this.lan,
     longitude:this.long,
