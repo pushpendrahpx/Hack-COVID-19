@@ -15,12 +15,13 @@
         android:layout_centerInParent="true"
         android:src="@drawable/logo" />
 
-    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imglogo"
         android:layout_centerHorizontal="true"
-        android:text="Quarantine Productivity"
+        android:layout_marginTop="115dp"
+        android:text="@string/quarantine_productivity"
         android:textColor="@color/colorAccent"
         android:textSize="30dp"
         android:textStyle="italic" />

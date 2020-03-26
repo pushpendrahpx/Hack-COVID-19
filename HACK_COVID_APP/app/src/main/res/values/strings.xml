@@ -3,7 +3,7 @@
     <string name="already_user_login_here">Already User? LogIn here</string>
     <string name="enter_your_phone_no">Enter your phone no</string>
     <string name="user_name">User Name</string>
-    <string name="singup">SingUp</string>
+    <string name="singup">Sign Up</string>
     <string name="logIn">Log In</string>
     <string name="not_a_user_register_here">Not a user? Register here!!</string>
     <string name="password">Password</string>
@@ -17,5 +17,7 @@
     <string name="tech_channel_description">des</string>
     <string name="tech_channel_name">Notification</string>
     <string name="fetching_status">Fetching status....</string>
+    <string name="quarantine_productivity">Quarantine Productivity</string>
+    <string name="phone_no">Phone No</string>
 
 </resources>
