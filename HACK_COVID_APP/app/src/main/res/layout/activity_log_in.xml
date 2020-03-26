@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    tools:context=".LogIn">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,13 +29,13 @@
             android:layout_width="@dimen/edit_text_user_input_width"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:hint="@string/hint_user_name"
+            android:hint="@string/user_name"
             android:inputType="text" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/password"
+            android:text="Password"
             android:textSize="@dimen/text_view_header_size"
             android:textStyle="bold" />
 
@@ -44,46 +44,16 @@
             android:layout_width="@dimen/edit_text_user_input_width"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:hint="@string/hint_password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/email_id"
-            android:textSize="@dimen/text_view_header_size"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="@dimen/edit_text_user_input_width"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:hint="@string/hint_enter_your_email_id"
-            android:inputType="textEmailAddress" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Phone No"
-            android:textSize="@dimen/text_view_header_size"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/et_phone_no"
-            android:layout_width="@dimen/edit_text_user_input_width"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:hint="@string/enter_your_phone_no"
-            android:inputType="phone" />
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvAlreadyUser"
+        android:id="@+id/tv_not_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/already_user_login_here"
+        android:text="@string/not_a_user_register_here"
         android:textColor="#3F51B5"
         android:textSize="@dimen/already_user"
         android:textStyle="bold"
@@ -95,13 +65,13 @@
         app:layout_constraintVertical_bias="0.948" />
 
     <Button
-        android:id="@+id/bSingup"
+        android:id="@+id/bLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:text="@string/singup"
+        android:text="@string/logIn"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/tvAlreadyUser"
+        app:layout_constraintBottom_toTopOf="@+id/tv_not_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -117,4 +87,5 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

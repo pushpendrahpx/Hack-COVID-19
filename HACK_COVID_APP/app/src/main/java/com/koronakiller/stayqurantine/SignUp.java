@@ -1,4 +1,4 @@
-package com.koronakiller.geolocation;
+package com.koronakiller.stayqurantine;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,19 +11,20 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.koronakiller.geolocation.models.User;
-import com.koronakiller.geolocation.utils.HttpHelper;
-import com.koronakiller.geolocation.utils.RequestPackage;
+import com.koronakiller.stayqurantine.models.User;
+import com.koronakiller.stayqurantine.utils.HttpHelper;
+import com.koronakiller.stayqurantine.utils.RequestPackage;
 
 import java.io.IOException;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SignUp";
+    private static final String KEY_USER_PARCEL = "KEY_PARCEL";
     private ProgressBar progressBar;
     private EditText etName, etPassword, etEmail, etPhone;
     private String userName, password, emailId, phoneNo;
     private Handler handler;
-    private String REGISTER_BASE_URL = "https://uhdcnkdf4.herokuapp.com/api/users/register";
+    private String REGISTER_BASE_URL = "https://uhdcnkdf4.herokuapp.com/api/users/register/android";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +93,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             showError(etPhone, "Please enter valid phone no!");
             return;
         }
+        Log.d(TAG, "signingUser: all text are checked");
         progressBar.setVisibility(View.VISIBLE);
-
+        //TODO : Check internet conn.
         Thread thread = new Thread() {
 
             @Override
@@ -106,6 +108,11 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 requestPackage.setParams(HttpHelper.KEY_USER_PARAMS, user);
                 try {
                     String data = HttpHelper.getJsonData(requestPackage);
+                    Log.d(TAG, "run: data is " + data);
+                    user = User.getUserFromJson(data);
+                    Intent i = new Intent(SignUp.this, HomeActivity.class);
+                    i.putExtra(KEY_USER_PARCEL, user);
+                    startActivity(i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
