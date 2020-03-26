@@ -126,7 +126,7 @@ router.post('/update/:phone/location',(req,res)=>{
     let lat = req.body.lat;
     let lng = req.body.lng;
     let time = req.body.time;
-    let acc = req.body.time;
+    let acc = req.body.accuracy;
 
 
     console.log("Latitude = "+lat+ ", Longitude = " + lng +" Time = "+ time + " with Accuracy = "+acc);
