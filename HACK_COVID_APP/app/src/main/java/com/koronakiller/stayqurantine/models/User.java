@@ -17,9 +17,20 @@ public class User implements Parcelable {
     private User() {
     }
 
-    public User(String phone, String password) {
+    private User(String phone, String password) {
         this.phone = phone;
         this.password = password;
+    }
+
+    public static User getUser(String phone, String password) {
+        if (userInstance == null) {
+            userInstance = new User();
+            userInstance.password = password;
+            userInstance.phone = phone;
+        }
+        userInstance.password = password;
+        userInstance.phone = phone;
+        return userInstance;
     }
 
     public static User getUser(String userName, String password, String phoneNo, String emailId) {

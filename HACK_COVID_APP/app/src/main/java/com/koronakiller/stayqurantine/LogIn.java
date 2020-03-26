@@ -82,11 +82,13 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
                 RequestPackage requestPackage = new RequestPackage();
                 requestPackage.setEndPoint(LOGIN_ENDPOINT);
                 requestPackage.setMethod("POST");
-                User user = new User(phoneNo, password);
+                User user = User.getUser(phoneNo, password);
                 requestPackage.setParams(HttpHelper.KEY_USER_PARAMS, user);
                 try {
                     String data = HttpHelper.getJsonData(requestPackage);
-                    Log.d(TAG, "run: data "+data);
+                    Log.d(TAG, "run: data " + data);
+                    Intent i = new Intent(LogIn.this, HomeActivity.class);
+                    startActivity(i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

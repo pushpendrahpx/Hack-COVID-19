@@ -16,5 +16,6 @@
     <string name="id_tech_channel_name">Notification</string>
     <string name="tech_channel_description">des</string>
     <string name="tech_channel_name">Notification</string>
+    <string name="fetching_status">Fetching status....</string>
 
 </resources>

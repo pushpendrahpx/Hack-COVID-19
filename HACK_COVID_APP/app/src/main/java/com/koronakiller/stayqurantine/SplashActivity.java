@@ -6,6 +6,9 @@ import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.koronakiller.stayqurantine.utils.NetworkHelper;
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -16,8 +19,11 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashActivity.this, SignUp.class);
-                startActivity(i);
+                if (NetworkHelper.isConnected(getApplicationContext())) {
+                    Intent i = new Intent(SplashActivity.this, SignUp.class);
+                    startActivity(i);
+                } else
+                    Snackbar.make(findViewById(R.id.parent_view), "Turn data on", Snackbar.LENGTH_INDEFINITE).show();
             }
         }, 2000);
     }

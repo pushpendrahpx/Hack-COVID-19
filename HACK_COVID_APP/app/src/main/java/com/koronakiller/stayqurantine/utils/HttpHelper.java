@@ -30,7 +30,7 @@ public class HttpHelper {
             connection.setConnectTimeout(10000);
             connection.setDoInput(true);
             connection.setDoOutput(true);
-            if (requestPackage != null && requestPackage.getMethod().equals("POST")) {
+            if (requestPackage.getParams() != null && requestPackage.getMethod().equals("POST")) {
                 Log.d(TAG, "getJsonData: setting params");
                 Log.d(TAG, "getJsonData: " + requestPackage.getParams().get(KEY_USER_PARAMS).toJson());
                 OutputStream os = connection.getOutputStream();
