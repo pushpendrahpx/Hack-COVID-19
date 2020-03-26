@@ -1,5 +1,7 @@
 package com.koronakiller.stayqurantine.models;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -124,4 +126,36 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
-}
+
+       // Added
+
+
+        Context context;
+
+        public void removeUser()
+        {
+            sharedPreferences.edit().clear().commit();
+        }
+
+        public String GetName() {
+            name = sharedPreferences.getString("userdata","");
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+            sharedPreferences.edit().putString("userdata",name).commit();
+
+        }
+
+        SharedPreferences sharedPreferences;
+
+        public User(Context context)
+        {
+            this.context=context;
+            sharedPreferences =context.getSharedPreferences("userdata",context.MODE_PRIVATE);
+
+        }
+
+    }
+

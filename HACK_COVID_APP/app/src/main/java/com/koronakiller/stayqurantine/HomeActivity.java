@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
@@ -47,6 +48,13 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int USER_ENTRY = 1;
     private static final int BACKGROUND_REQUEST_CODE = 100;
     private static final String KEY_MAP = "KEY_MAP";
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.koronakiller.stayqurantine.models.User;
+
 
     private TextView tvName, tvStatus, tvScore;
     private MapView mMap;
@@ -260,6 +268,15 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             outState.putBundle(getResources().getString(R.string.google_maps_key), mapViewBundle);
         }
         mMap.onSaveInstanceState(mapViewBundle);
+    }
+
+
+    public void logOut (View view)
+    {
+        new User(HomeActivity.this).removeUser();
+        Intent intent = new Intent(HomeActivity.this,LogIn.class);
+        startActivity(intent);
+        finish();
     }
 
 }

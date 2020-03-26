@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.koronakiller.stayqurantine.utils.NetworkHelper;
+import com.koronakiller.stayqurantine.models.User;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         Handler handler = new Handler(getMainLooper());
+        final User user = new User(SplashActivity.this);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -24,6 +26,16 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(i);
                 } else
                     Snackbar.make(findViewById(R.id.parent_view), "Turn data on", Snackbar.LENGTH_INDEFINITE).show();
+
+                if(user.GetName()!="") {
+                    Intent i = new Intent(SplashActivity.this, SignUp.class);
+                    i.putExtra("name",user.GetName());
+                    startActivity(i);
+                }
+                else {
+                    Intent i = new Intent(SplashActivity.this, HomeActivity.class);
+                    startActivity(i);
+                }
             }
         }, 2000);
     }
