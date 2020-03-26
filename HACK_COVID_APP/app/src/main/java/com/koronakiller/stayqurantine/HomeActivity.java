@@ -12,7 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 
+import com.koronakiller.stayqurantine.models.User;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -50,11 +54,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int BACKGROUND_REQUEST_CODE = 100;
     private static final String KEY_MAP = "KEY_MAP";
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 
-import com.koronakiller.stayqurantine.models.User;
 
 
     private TextView tvName, tvStatus, tvScore;
