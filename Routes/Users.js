@@ -129,7 +129,7 @@ router.post('/update/:phone/location',(req,res)=>{
     let acc = req.body.accuracy;
 
 
-    console.log("Latitude = "+lat+ ", Longitude = " + lng +" Time = "+ time + " with Accuracy = "+acc);
+    // console.log("Latitude = "+lat+ ", Longitude = " + lng +" Time = "+ time + " with Accuracy = "+acc);
 
     let UserModel = require("./../Models/UserModel");
     UserModel.findOne({phone:phone},(error,UserFromDB)=>{
@@ -151,7 +151,7 @@ router.post('/update/:phone/location',(req,res)=>{
                             homeLocation:{lat:lat,lng:lng,time:time,Accuracy:acc},
                     $push: {'location.$.old': {lat:lat,lng:lng,time:time}}
                     },(err,docs)=>{
-        console.log(UserFromDB)
+        // console.log(UserFromDB)
         // console.log(docs)
         res.json(UserFromDB)
         })
@@ -167,7 +167,7 @@ router.post('/update/:phone/location',(req,res)=>{
                  homeLocation:{lat:UserFromDB.location.latitude.value,lng:UserFromDB.location.longitude.value,time:UserFromDB.location.latitude.time},
                 $push: {'location.$.old': {lat:lat,lng:lng,time:time}}
                 },(err,docs)=>{
-    console.log(UserFromDB)
+    // console.log(UserFromDB)
     // console.log(docs)
     res.json(UserFromDB)
     })
@@ -350,7 +350,7 @@ router.post('/update/points/android',(req,res)=>{
     let UserModel = require("./../Models/UserModel");
 
 
-    
+
     // true,false
     switch(locationCode)
     {
