@@ -55,7 +55,7 @@ class home extends Component {
           
           this.sendLocationtoServer();
 
-        
+          
           
         },500)
       }
@@ -132,7 +132,9 @@ getCurrentLocation = ()=>{
         // console.log(this.state)
     }
 
-
+    componentDidMount(){
+      window.stop();
+    }
 
     render() {
         if(this.state.isLoggedIn == false){
