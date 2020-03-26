@@ -55,7 +55,9 @@ class home extends Component {
           this.getUsers();
           this.sendLocationtoServer();
 
-          this.setState({d:1})
+          this.setState({d:1},()=>{
+            console.clear();
+          })
           
         },500)
       }
