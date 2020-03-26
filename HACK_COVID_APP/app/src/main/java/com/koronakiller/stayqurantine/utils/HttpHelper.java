@@ -43,7 +43,7 @@ public class HttpHelper {
             connection.connect();
             int responseCode = connection.getResponseCode();
             Log.d(TAG, "getJsonData: Response code is " + responseCode);
-            if (responseCode == HttpURLConnection.HTTP_CREATED) {
+            if (responseCode == 200) {
                 try (BufferedReader br = new BufferedReader(
                         new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
                     StringBuilder response = new StringBuilder();
@@ -56,6 +56,7 @@ public class HttpHelper {
                 }
             }
         } catch (Exception e) {
+            Log.i(TAG, "getJsonData: error");
             e.printStackTrace();
         }
 

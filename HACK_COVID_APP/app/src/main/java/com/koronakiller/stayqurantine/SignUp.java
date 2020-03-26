@@ -19,7 +19,6 @@ import java.io.IOException;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "SignUp";
-    private static final String KEY_USER_PARCEL = "KEY_PARCEL";
     private ProgressBar progressBar;
     private EditText etName, etPassword, etEmail, etPhone;
     private String userName, password, emailId, phoneNo;
@@ -96,6 +95,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         Log.d(TAG, "signingUser: all text are checked");
         progressBar.setVisibility(View.VISIBLE);
         //TODO : Check internet conn.
+        // FIXME
         Thread thread = new Thread() {
 
             @Override
@@ -109,9 +109,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 try {
                     String data = HttpHelper.getJsonData(requestPackage);
                     Log.d(TAG, "run: data is " + data);
-                    user = User.getUserFromJson(data);
                     Intent i = new Intent(SignUp.this, HomeActivity.class);
-                    i.putExtra(KEY_USER_PARCEL, user);
+                    i.putExtra(LogIn.KEY_USER, user);
                     startActivity(i);
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -18,6 +18,7 @@ import java.io.IOException;
 public class LogIn extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "LogIn";
     private static final String LOGIN_PAYLOAD = "LOGIN_PAYLOAD";
+    public static final String KEY_USER = "Key User";
     private ProgressBar progressBar;
     private EditText etPhone, etPassword;
 
@@ -88,6 +89,7 @@ public class LogIn extends AppCompatActivity implements View.OnClickListener {
                     String data = HttpHelper.getJsonData(requestPackage);
                     Log.d(TAG, "run: data " + data);
                     Intent i = new Intent(LogIn.this, HomeActivity.class);
+                    i.putExtra(KEY_USER,user);
                     startActivity(i);
                 } catch (IOException e) {
                     e.printStackTrace();

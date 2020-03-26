@@ -12,16 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 
-import com.koronakiller.stayqurantine.models.User;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.Geofence;
@@ -42,6 +37,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.koronakiller.stayqurantine.models.User;
+import com.koronakiller.stayqurantine.utils.HttpHelper;
+import com.koronakiller.stayqurantine.utils.RequestPackage;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -53,9 +50,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int USER_ENTRY = 1;
     private static final int BACKGROUND_REQUEST_CODE = 100;
     private static final String KEY_MAP = "KEY_MAP";
-
-
-
+    private static final String LOCATION_ENDPOINT ="";
 
     private TextView tvName, tvStatus, tvScore;
     private MapView mMap;
@@ -67,6 +62,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GeofencingClient client;
     private PendingIntent geofencePendingIntent;
     private Geofence geofence;
+    private TextView tvPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +73,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (savedInstanceState != null)
             mapViewBundle = savedInstanceState.getBundle(getResources().getString(R.string.google_maps_key));
         mMap.onCreate(mapViewBundle);
-
+        User user = getIntent().getParcelableExtra(LogIn.KEY_USER);//FIXME
+        tvPhone = findViewById(R.id.tvUserName);
+        tvPhone.setText(user.getPhoneNo());
         locationProviderClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());//this will provide location
         request = LocationRequest.create(); //set perameters to our client
         request.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -194,14 +192,14 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 //                ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, BACKGROUND_REQUEST_CODE);
 //            } else {
 //                ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION}, LOCATION_PERMISSION);
-                // Show an explanation to the user as to why your app needs the
-                // permission. Display the explanation *asynchronously* -- don't block
-                // this thread waiting for the user's response!
+            // Show an explanation to the user as to why your app needs the
+            // permission. Display the explanation *asynchronously* -- don't block
+            // this thread waiting for the user's response!
 
         } else {
             // Background location runtime permission already granted.
             // You can now call geofencingClient.addGeofences().
-            Log.d(TAG,"Fencing ");
+            Log.d(TAG, "Fencing ");
             client = LocationServices.getGeofencingClient(getApplicationContext());
             geofence = new Geofence.Builder().setRequestId(GEO_FENCE_ID).
                     setCircularRegion(currentLocation.getLatitude(), currentLocation.getLongitude(), RADIUS_IN_METER).
@@ -216,6 +214,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                             .radius(RADIUS_IN_METER)
                             .strokeWidth(5.0f)
                             .strokeColor(Color.BLUE));
+                    RequestPackage requestPackage = new RequestPackage();
+                    requestPackage.setEndPoint(LOCATION_ENDPOINT);
+                    requestPackage.setMethod("POST");
+                    requestPackage.setParams(,);
+
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -272,10 +275,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-    public void logOut (View view)
-    {
+    public void logOut(View view) {
         new User(HomeActivity.this).removeUser();
-        Intent intent = new Intent(HomeActivity.this,LogIn.class);
+        Intent intent = new Intent(HomeActivity.this, LogIn.class);
         startActivity(intent);
         finish();
     }
