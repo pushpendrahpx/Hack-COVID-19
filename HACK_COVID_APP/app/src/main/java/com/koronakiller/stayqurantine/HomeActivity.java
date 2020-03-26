@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.koronakiller.stayqurantine.models.User;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = HomeActivity.class.getSimpleName();
