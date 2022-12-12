@@ -12,7 +12,7 @@
     "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "here-maps-react": "^1.1.0",
     "mongoose": "^5.9.5",
     "react-google-maps": "^9.4.5",
